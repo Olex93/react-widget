@@ -46,7 +46,7 @@ function App({ domElement }) {
   return (
     <div className="reddit_widget__app">
       <h1 className="reddit_widget__header">
-        Latest posts in <a href={`https://reddit.com/r/${subreddit}`} rel="noopener noreferrer">/r/{subreddit}</a>
+        Your url is {window.location.href}
       </h1>
       <div className="reddit_widget__inner">
         {loading && "Loading..."}
