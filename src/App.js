@@ -42,7 +42,7 @@ function App({ domElement }) {
         setError('error fetching from reddit');
       });
   }, [ subreddit ])
-
+  console.log(domElement)
   return (
     <div className="reddit_widget__app">
       <h1 className="reddit_widget__header">
