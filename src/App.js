@@ -8,6 +8,7 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import "./scss/typography.scss";
 import "./scss/global.scss";
+import { browserName, deviceType } from "react-device-detect";
 
 const ip = require("ip");
 
@@ -18,7 +19,8 @@ function App({ domElement }) {
   const [ipAddress, setIpAddress] = React.useState("");
   const [totalResourcesSize, setTotalResourcesSize] = React.useState(0);
   const [windowUrl, setWindowUrl] = React.useState("");
-
+  const [countryFromIp, setCountryFromIp] = React.useState("Unknown location");
+  const [cityFromIp, setCityFromIp] = React.useState("Unknown city")
   const [backgroundColor, setBackgroundColor] = React.useState("#FFEEDB");
   const [highlightColor, setHighlightColor] = React.useState("#0A1D37");
   const [widgetType, setWidgetType] = React.useState("chatBox");
@@ -29,6 +31,18 @@ function App({ domElement }) {
   useEffect(() => {
     // Fetch data from reddit
     setLoading(true);
+
+    fetch("https://extreme-ip-lookup.com/json/")
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response)
+        setCountryFromIp(response.country)
+        setCityFromIp(response.city)
+      })
+      .catch((data, status) => {
+        console.log("Unable to find location");
+      });
+
     axios
       .post("https://reqres.in/api/login", {
         email: "eve.holt@reqres.in",
@@ -36,7 +50,6 @@ function App({ domElement }) {
       })
       .then((response) => {
         setToken(response.data.token);
-        console.log(response)
         setIpAddress(ip.address());
         setWindowUrl(window.location.href);
         const loadedResources = window.performance.getEntriesByType("resource");
@@ -52,6 +65,8 @@ function App({ domElement }) {
         setLoading(false);
         setError("error fetching from api");
       });
+
+    
   }, []);
 
   return (
@@ -70,6 +85,10 @@ function App({ domElement }) {
               totalResourcesSize={totalResourcesSize}
               windowUrl={windowUrl}
               token={token}
+              browserName={browserName}
+              deviceType={deviceType}
+              countryFromIp={countryFromIp}
+              cityFromIp={cityFromIp}
             />
           )}
           {widgetType === "topBar" && (
@@ -81,6 +100,10 @@ function App({ domElement }) {
               totalResourcesSize={totalResourcesSize}
               windowUrl={windowUrl}
               token={token}
+              browserName={browserName}
+              deviceType={deviceType}
+              countryFromIp={countryFromIp}
+              cityFromIp={cityFromIp}
             />
           )}
           {widgetType === "footer" && (
@@ -92,6 +115,10 @@ function App({ domElement }) {
               totalResourcesSize={totalResourcesSize}
               windowUrl={windowUrl}
               token={token}
+              browserName={browserName}
+              deviceType={deviceType}
+              countryFromIp={countryFromIp}
+              cityFromIp={cityFromIp}
             />
           )}
           {widgetType === "iframeEmbed" && (
@@ -103,6 +130,10 @@ function App({ domElement }) {
               totalResourcesSize={totalResourcesSize}
               windowUrl={windowUrl}
               token={token}
+              browserName={browserName}
+              deviceType={deviceType}
+              countryFromIp={countryFromIp}
+              cityFromIp={cityFromIp}
             />
           )}
         </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -12,7 +12,6 @@ export default function Iframe(props) {
   const [token, setToken] = useState("");
 
   function login() {
-    console.log("hello");
     axios
       .post("https://reqres.in/api/login", {
         email: "eve.holt@reqres.in",

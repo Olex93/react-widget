@@ -1,7 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "../scss/chatbox.scss";
 import "../scss/typography.scss";
 
@@ -13,7 +10,11 @@ export default function Chatbox(props) {
     ipAddress,
     totalResourcesSize,
     windowUrl,
-    token
+    token,
+    browserName,
+    deviceType,
+    countryFromIp,
+    cityFromIp
   } = props;
   return (
     <div
@@ -28,8 +29,14 @@ export default function Chatbox(props) {
         The total size of all resources loaded by this page is{" "}
         {totalResourcesSize} kb
       </p>
-      <p>You have sent an authentication request to an api and received this token back: {token}</p>
+      <p>
+        You have sent an authentication request to an api and received this
+        token back: {token}
+      </p>
       <p>Your url is {windowUrl}</p>
+      <p>You are browsing in {browserName}</p>
+      <p>Your device is {deviceType}</p>
+      <p>You are browsing from  {cityFromIp}, {countryFromIp}</p>
     </div>
   );
 }
