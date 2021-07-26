@@ -6,9 +6,6 @@ import Chatbox from "./components/Chatbox";
 import Iframe from "./components/Iframe";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "./scss/typography.scss";
 import "./scss/global.scss";
 
@@ -25,7 +22,7 @@ function App({ domElement }) {
   const [backgroundColor, setBackgroundColor] = React.useState("#FFEEDB");
   const [highlightColor, setHighlightColor] = React.useState("#0A1D37");
   const [widgetType, setWidgetType] = React.useState("chatBox");
-  const [companyName, setCompanyName] = React.useState("ClickNeutral")
+  const [companyName, setCompanyName] = React.useState("ClickNeutral");
 
   let resourceSizes = [];
 
@@ -39,6 +36,7 @@ function App({ domElement }) {
       })
       .then((response) => {
         setToken(response.data.token);
+        console.log(response)
         setIpAddress(ip.address());
         setWindowUrl(window.location.href);
         const loadedResources = window.performance.getEntriesByType("resource");
@@ -61,53 +59,54 @@ function App({ domElement }) {
       {loading && "Loading..."}
       {error && error}
 
-      {!loading && !error && <Container
-        fluid
-        className="widget clickNeutral_Widget"
-        style={{ backgroundColor: backgroundColor }}
-      >
-        <Row className="widget-containerRow">
-          <Col className="widget-containerCol">
-            <p>Your url is ${window.location.href}</p>
-            {widgetType === "chatBox" && (
-              <Chatbox
-                backgroundColor={backgroundColor}
-                highlightColor={highlightColor}
-                companyName={companyName}
-                ipAddress={ipAddress}
-                totalResourcesSize={totalResourcesSize}
-              />
-            )}
-            {widgetType === "topBar" && (
-              <Topbar
-                backgroundColor={backgroundColor}
-                highlightColor={highlightColor}
-                companyName={companyName}
-                ipAddress={ipAddress}
-                totalResourcesSize={totalResourcesSize}
-              />
-            )}
-            {widgetType === "footer" && (
-              <Footer
-                backgroundColor={backgroundColor}
-                highlightColor={highlightColor}
-                companyName={companyName}
-                ipAddress={ipAddress}
-                totalResourcesSize={totalResourcesSize}
-              />
-            )}
-            {widgetType === "iframeEmbed" && (
-              <Iframe
-                backgroundColor={backgroundColor}
-                highlightColor={highlightColor}
-                companyName={companyName}
-                ipAddress={ipAddress}
-                totalResourcesSize={totalResourcesSize}
-              />
-            )}
-          </Col>
-        </Row>
-      </Container>}
+      {!loading && !error && (
+        <>
+          {widgetType === "chatBox" && (
+            <Chatbox
+              backgroundColor={backgroundColor}
+              highlightColor={highlightColor}
+              companyName={companyName}
+              ipAddress={ipAddress}
+              totalResourcesSize={totalResourcesSize}
+              windowUrl={windowUrl}
+              token={token}
+            />
+          )}
+          {widgetType === "topBar" && (
+            <Topbar
+              backgroundColor={backgroundColor}
+              highlightColor={highlightColor}
+              companyName={companyName}
+              ipAddress={ipAddress}
+              totalResourcesSize={totalResourcesSize}
+              windowUrl={windowUrl}
+              token={token}
+            />
+          )}
+          {widgetType === "footer" && (
+            <Footer
+              backgroundColor={backgroundColor}
+              highlightColor={highlightColor}
+              companyName={companyName}
+              ipAddress={ipAddress}
+              totalResourcesSize={totalResourcesSize}
+              windowUrl={windowUrl}
+              token={token}
+            />
+          )}
+          {widgetType === "iframeEmbed" && (
+            <Iframe
+              backgroundColor={backgroundColor}
+              highlightColor={highlightColor}
+              companyName={companyName}
+              ipAddress={ipAddress}
+              totalResourcesSize={totalResourcesSize}
+              windowUrl={windowUrl}
+              token={token}
+            />
+          )}
+        </>
+      )}
     </>
   );
 }

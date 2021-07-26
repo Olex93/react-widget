@@ -19,13 +19,17 @@ export default function Iframe(props) {
         password: "cityslicka",
       })
       .then((response) => {
-        setToken(response.data.token)
-        console.log(response)
+        setToken(response.data.token);
+        console.log(response);
       });
   }
 
   return (
-    <Container fluid className="iframe p-3">
+    <Container
+      fluid
+      className="iframe p-3"
+      style={{ backgroundColor: backgroundColor }}
+    >
       <Row>
         <Col>
           <h4 style={{ color: highlightColor }}>Hey {companyName}</h4>

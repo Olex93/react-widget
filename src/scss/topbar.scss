@@ -1,12 +1,7 @@
 .topbar {
-  height: 100%;
-  .topBarRow {
-    height: 100%;
-    .topbarCol {
-      height: 100%; 
-      justify-content: center;
-      display: flex;
-      flex-direction: column;
-    }
-  }
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

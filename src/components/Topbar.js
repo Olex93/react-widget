@@ -8,12 +8,12 @@ import "../scss/typography.scss";
 export default function Topbar(props) {
   const { highlightColor, backgroundColor, companyName } = props;
   return (
-    <Container fluid className="topbar">
-      <Row className="topBarRow">
+    <Container fluid className="topbar"  style={{backgroundColor: backgroundColor}}>
+      <Row className="topBarRow p-2">
         <Col className="col-3 topbarCol">
           <h4 style={{ color: highlightColor }}>Hey {companyName}</h4>
         </Col>
-        <Col className="topbarCol">
+        <Col className="col-3 topbarCol">
           <p className="bodyText">I am a topbar style widget</p>
         </Col>
       </Row>
