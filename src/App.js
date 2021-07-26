@@ -1,69 +1,114 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import axios from "axios";
 
-// Render each post
-function renderPost(post){
-  const { data: { title, url, author, id } } = post
-  const authorUrl = `https://www.reddit.com/u/${author}`
+import Chatbox from "./components/Chatbox";
+import Iframe from "./components/Iframe";
+import Topbar from "./components/Topbar";
+import Footer from "./components/Footer";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./scss/typography.scss";
+import "./scss/global.scss";
 
-  return (
-    <div className="reddit_widget__post" key={id}>
-      <div className="reddit_widget__posted_by">
-        posted by <a href={authorUrl} className="reddit_widget__posted_by" target="_blank" rel="noopener noreferrer">u/{author}</a>
-      </div>
-      <a href={url} className="reddit_widget__title" target="_blank" rel="noopener noreferrer">{title}</a>
-    </div>
-  )
-}
-
-// Filter, since reddit always returns stickied posts up top
-function nonStickiedOnly(post){
-  return !post.data.stickied
-}
+const ip = require("ip");
 
 function App({ domElement }) {
-  const subreddit = domElement.getAttribute("data-subreddit")
   const [loading, setLoading] = useState();
-  const [error, setError] = useState('');
-  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+  const [token, setToken] = useState("");
+  const [ipAddress, setIpAddress] = React.useState("");
+  const [totalResourcesSize, setTotalResourcesSize] = React.useState(0);
+  const [windowUrl, setWindowUrl] = React.useState("");
+
+  const [backgroundColor, setBackgroundColor] = React.useState("#FFEEDB");
+  const [highlightColor, setHighlightColor] = React.useState("#0A1D37");
+  const [widgetType, setWidgetType] = React.useState("chatBox");
+  const [companyName, setCompanyName] = React.useState("ClickNeutral")
+
+  let resourceSizes = [];
 
   useEffect(() => {
     // Fetch data from reddit
-    setLoading(true)
-    fetch(`https://www.reddit.com/r/${subreddit}.json`)
-      .then((response) => response.json())
-      .then((data) => {
+    setLoading(true);
+    axios
+      .post("https://reqres.in/api/login", {
+        email: "eve.holt@reqres.in",
+        password: "cityslicka",
+      })
+      .then((response) => {
+        setToken(response.data.token);
+        setIpAddress(ip.address());
+        setWindowUrl(window.location.href);
+        const loadedResources = window.performance.getEntriesByType("resource");
+        loadedResources.forEach((resourceItem) => {
+          resourceSizes.push(resourceItem.encodedBodySize);
+        });
+      })
+      .then(() => {
+        setTotalResourcesSize(resourceSizes.reduce((a, b) => a + b, 0) / 1000);
         setLoading(false);
-        setData(data.data.children.slice(0, 10));
       })
       .catch((e) => {
-        console.log(e)
         setLoading(false);
-        setError('error fetching from reddit');
+        setError("error fetching from api");
       });
-  }, [ subreddit ])
-  console.log(domElement)
+  }, []);
+
   return (
-    <div className="reddit_widget__app">
-      <h1 className="reddit_widget__header">
-        Your url is {window.location.href}
-      </h1>
-      <div className="reddit_widget__inner">
-        {loading && "Loading..."}
-        {error && error}
-        {!!data.length && data.filter(nonStickiedOnly).map(renderPost)}
-      </div>
-      <p className="reddit_widget__powered_by">
-        This widget is powered by{" "}
-        <a
-          href="https://javascriptpros.com"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          JavaScriptPros.com
-        </a>
-      </p>
-    </div>
+    <>
+      {loading && "Loading..."}
+      {error && error}
+
+      {!loading && !error && <Container
+        fluid
+        className="widget clickNeutral_Widget"
+        style={{ backgroundColor: backgroundColor }}
+      >
+        <Row className="widget-containerRow">
+          <Col className="widget-containerCol">
+            <p>Your url is ${window.location.href}</p>
+            {widgetType === "chatBox" && (
+              <Chatbox
+                backgroundColor={backgroundColor}
+                highlightColor={highlightColor}
+                companyName={companyName}
+                ipAddress={ipAddress}
+                totalResourcesSize={totalResourcesSize}
+              />
+            )}
+            {widgetType === "topBar" && (
+              <Topbar
+                backgroundColor={backgroundColor}
+                highlightColor={highlightColor}
+                companyName={companyName}
+                ipAddress={ipAddress}
+                totalResourcesSize={totalResourcesSize}
+              />
+            )}
+            {widgetType === "footer" && (
+              <Footer
+                backgroundColor={backgroundColor}
+                highlightColor={highlightColor}
+                companyName={companyName}
+                ipAddress={ipAddress}
+                totalResourcesSize={totalResourcesSize}
+              />
+            )}
+            {widgetType === "iframeEmbed" && (
+              <Iframe
+                backgroundColor={backgroundColor}
+                highlightColor={highlightColor}
+                companyName={companyName}
+                ipAddress={ipAddress}
+                totalResourcesSize={totalResourcesSize}
+              />
+            )}
+          </Col>
+        </Row>
+      </Container>}
+    </>
   );
 }
 
