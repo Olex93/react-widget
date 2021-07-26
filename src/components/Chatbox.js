@@ -14,7 +14,7 @@ export default function Chatbox(props) {
     browserName,
     deviceType,
     countryFromIp,
-    cityFromIp
+    cityFromIp,
   } = props;
   return (
     <div
@@ -26,7 +26,7 @@ export default function Chatbox(props) {
       <p className="bodyText">I am a chatbox style widget</p>
       <p>Your ip address is {ipAddress}</p>
       <p>
-        The total size of all resources loaded by this page is{" "}
+        The total uncached size of all resources loaded by this page is
         {totalResourcesSize} kb
       </p>
       <p>
@@ -36,7 +36,9 @@ export default function Chatbox(props) {
       <p>Your url is {windowUrl}</p>
       <p>You are browsing in {browserName}</p>
       <p>Your device is {deviceType}</p>
-      <p>You are browsing from  {cityFromIp}, {countryFromIp}</p>
+      <p>
+        You are browsing from {cityFromIp}, {countryFromIp}
+      </p>
     </div>
   );
 }
