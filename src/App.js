@@ -16,15 +16,15 @@ function App({ domElement }) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
-  const [ipAddress, setIpAddress] = React.useState("");
-  const [totalResourcesSize, setTotalResourcesSize] = React.useState(0);
-  const [windowUrl, setWindowUrl] = React.useState("");
-  const [countryFromIp, setCountryFromIp] = React.useState("Unknown location");
-  const [cityFromIp, setCityFromIp] = React.useState("Unknown city")
-  const [backgroundColor, setBackgroundColor] = React.useState("#FFEEDB");
-  const [highlightColor, setHighlightColor] = React.useState("#0A1D37");
-  const [widgetType, setWidgetType] = React.useState("chatBox");
-  const [companyName, setCompanyName] = React.useState("ClickNeutral");
+  const [ipAddress, setIpAddress] = useState("");
+  const [totalResourcesSize, setTotalResourcesSize] = useState(0);
+  const [windowUrl, setWindowUrl] = useState("");
+  const [countryFromIp, setCountryFromIp] = useState("Unknown location");
+  const [cityFromIp, setCityFromIp] = useState("Unknown city");
+  const [backgroundColor, setBackgroundColor] = useState("#FFEEDB");
+  const [highlightColor, setHighlightColor] = useState("#0A1D37");
+  const [widgetType, setWidgetType] = useState("chatBox");
+  const [companyName, setCompanyName] = useState("ClickNeutral");
 
   let resourceSizes = [];
 
@@ -35,9 +35,9 @@ function App({ domElement }) {
     fetch("https://extreme-ip-lookup.com/json/")
       .then((res) => res.json())
       .then((response) => {
-        console.log(response)
-        setCountryFromIp(response.country)
-        setCityFromIp(response.city)
+        console.log(response);
+        setCountryFromIp(response.country);
+        setCityFromIp(response.city);
       })
       .catch((data, status) => {
         console.log("Unable to find location");
@@ -65,8 +65,6 @@ function App({ domElement }) {
         setLoading(false);
         setError("error fetching from api");
       });
-
-    
   }, []);
 
   return (
