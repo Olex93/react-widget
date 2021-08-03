@@ -55,8 +55,9 @@ function App({ domElement }) {
         setToken(response.data.token);
         setIpAddress(ip.address());
         setWindowUrl(window.location.href);
-        // setDomainWhois(whoiser(windowUrl))
-
+        const url = window.location.href
+        setDomainWhois(whoiser(url))
+        
         const loadedResources = window.performance.getEntriesByType("resource");
         loadedResources.forEach((resourceItem) => {
           resourceSizes.push(resourceItem.encodedBodySize);
