@@ -17,6 +17,7 @@ export default function Chatbox(props) {
     deviceType,
     countryFromIp,
     cityFromIp,
+    domainWhois
   } = props;
 
   return (
@@ -44,6 +45,7 @@ export default function Chatbox(props) {
           <p>
             You are browsing from {cityFromIp}, {countryFromIp}
           </p>
+          <p>Your domain is {domainWhois}</p>
           <BrandButton
             action={setExpanded}
             actionParams={false}

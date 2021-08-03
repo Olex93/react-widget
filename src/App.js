@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import "./scss/typography.scss";
 import "./scss/global.scss";
 import { browserName, deviceType } from "react-device-detect";
+const whoiser = require('whoiser')
 
 const ip = require("ip");
 
@@ -21,6 +22,7 @@ function App({ domElement }) {
   const [windowUrl, setWindowUrl] = useState("");
   const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   const [cityFromIp, setCityFromIp] = useState("Unknown city");
+  const [domainWhois, setDomainWhois] = useState("Unknown domain")
   const [backgroundColor, setBackgroundColor] = useState("#FFEEDB");
   const [highlightColor, setHighlightColor] = useState("#0A1D37");
   const [widgetType, setWidgetType] = useState("chatBox");
@@ -49,9 +51,12 @@ function App({ domElement }) {
         password: "cityslicka",
       })
       .then((response) => {
+        // Add if authenticated logic
         setToken(response.data.token);
         setIpAddress(ip.address());
         setWindowUrl(window.location.href);
+        setDomainWhois(whoiser(windowUrl))
+
         const loadedResources = window.performance.getEntriesByType("resource");
         loadedResources.forEach((resourceItem) => {
           resourceSizes.push(resourceItem.encodedBodySize);
@@ -87,6 +92,7 @@ function App({ domElement }) {
               deviceType={deviceType}
               countryFromIp={countryFromIp}
               cityFromIp={cityFromIp}
+              domainWhois={domainWhois}
             />
           )}
           {widgetType === "topBar" && (
