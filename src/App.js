@@ -56,6 +56,7 @@ function App({ domElement }) {
         setIpAddress(ip.address());
         setWindowUrl(window.location.href);
         const url = window.location.href
+        console.log(url)
         setDomainWhois(whoiser(url))
         
         const loadedResources = window.performance.getEntriesByType("resource");
