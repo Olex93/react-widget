@@ -9,7 +9,8 @@ import Footer from "./components/Footer";
 import "./scss/typography.scss";
 import "./scss/global.scss";
 import { browserName, deviceType } from "react-device-detect";
-const whoiser = require('whoiser')
+import whoiser from "whoiser"
+
 
 const ip = require("ip");
 
