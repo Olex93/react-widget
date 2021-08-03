@@ -56,8 +56,7 @@ function App({ domElement }) {
         setWindowUrl(window.location.href);
         const url = window.location.href;
         console.log(url);
-        const whoiser = require("whoiser");
-        setDomainWhois(whoiser(url));
+
 
         const loadedResources = window.performance.getEntriesByType("resource");
         loadedResources.forEach((resourceItem) => {
