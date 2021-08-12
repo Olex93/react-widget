@@ -8,9 +8,9 @@ import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 import "./scss/typography.scss";
 import "./scss/global.scss";
-import { browserName, deviceType } from "react-device-detect";
+import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
-const ip = require("ip");
+// const ip = require("ip");
 
 function App({ domElement }) {
   const [loading, setLoading] = useState();
@@ -30,42 +30,49 @@ function App({ domElement }) {
   let resourceSizes = [];
 
   useEffect(() => {
-    // Fetch data from reddit
     setLoading(true);
 
+    console.log('-------- DEVICE TYPE: ' + deviceDetect + ' ----------' )
+
+    //Fetch country and city of the end user
     fetch("https://extreme-ip-lookup.com/json/")
       .then((res) => res.json())
       .then((response) => {
         console.log(response);
         setCountryFromIp(response.country);
         setCityFromIp(response.city);
+        setIpAddress(response.query)
       })
       .catch((data, status) => {
         console.log("Unable to find location");
       });
-
+    
+    //Make POST request to the .NET API, then ...
     axios
       .post("https://reqres.in/api/login", {
         email: "eve.holt@reqres.in",
         password: "cityslicka",
       })
       .then((response) => {
+        //Once all data is loaded, but before the page size is calculated
+        setLoading(false);
+
         // Add if authenticated logic
         setToken(response.data.token);
-        setIpAddress(ip.address());
+        //Can use the below package to identify ip if the above fetch request isn't great
+        // setIpAddress(ip.address());
+        // Capture the page url
         setWindowUrl(window.location.href);
-        const url = window.location.href;
-        console.log(url);
 
-
+        //capture the resources loaded by the page
         const loadedResources = window.performance.getEntriesByType("resource");
         loadedResources.forEach((resourceItem) => {
           resourceSizes.push(resourceItem.encodedBodySize);
         });
       })
       .then(() => {
+        //calculate the combined total size of resources in kb
         setTotalResourcesSize(resourceSizes.reduce((a, b) => a + b, 0) / 1000);
-        setLoading(false);
       })
       .catch((e) => {
         setLoading(false);
