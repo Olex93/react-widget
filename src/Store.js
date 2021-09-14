@@ -9,7 +9,7 @@ const initialState = {
   totalSessionResourcSize:'',
   countryFromIp: '',
   cityFromIp: '',
-  chatboxExpanded: true,
+  chatboxExpanded: false,
   bodyFont: 'Arial, Helvetica, sans-serif',
   headingFont: null,
   //COLLAPSED CHATBOX VARS

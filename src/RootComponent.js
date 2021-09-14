@@ -92,15 +92,9 @@ export default function RootComponent(props) {
       {!loading && !error && (
         <>
           {state.widgetType === "chatBox" && <Chatbox />}
-          {state.widgetType === "topBar" && (
-            <Topbar browserName={browserName} deviceType={deviceType} />
-          )}
-          {state.widgetType === "footer" && (
-            <Footer browserName={browserName} deviceType={deviceType} />
-          )}
-          {state.widgetType === "iframeEmbed" && (
-            <Iframe browserName={browserName} deviceType={deviceType} />
-          )}
+          {state.widgetType === "topBar" && <Topbar />}
+          {state.widgetType === "footer" && <Footer />}
+          {state.widgetType === "iframeEmbed" && <Iframe />}
         </>
       )}
     </>
