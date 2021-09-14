@@ -51,6 +51,26 @@
 
         .bodyText {
           margin: 0 0 15px 0;
+          position: relative;
+
+          .tooltipIcon {
+            height: 17px;
+            width: 17px;
+            position: relative;
+            margin-left: 10px;
+            &:hover,
+            &:focus {
+              cursor: pointer;
+            }
+            &::after {
+              content: url("../images/tooltip-icon-TEMP.png");
+              height: 100%;
+              width: 100%;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
         }
       }
     }

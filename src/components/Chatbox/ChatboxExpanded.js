@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { Context } from "../../Store";
 import ExpandCollapseToggle from "../ExpandCollapseToggle";
-import StringSpan from "../StringSpan";
 
 export default function ChatboxExpanded() {
   const [state] = useContext(Context);
 
-  const processedString = state.chatBoxExpandedStandFirstText.replace('{today}', <StringSpan text={state.chatBoxExpandedCo2Today} />).replace('{total}', state.chatBoxExpandedCo2Total)
+  // const processedString = state.chatBoxExpandedStandFirstText.replace('{today}', <StringSpan text={state.chatBoxExpandedCo2Today} />).replace('{total}', state.chatBoxExpandedCo2Total)
   const stringStart = state.chatBoxExpandedStandFirstText.substring(0, state.chatBoxExpandedStandFirstText.indexOf('{'))
   const stringMiddle = state.chatBoxExpandedStandFirstText.substring(state.chatBoxExpandedStandFirstText.indexOf('}') +1 , state.chatBoxExpandedStandFirstText.lastIndexOf('{'))
   const stringEnd = state.chatBoxExpandedStandFirstText.substring(state.chatBoxExpandedStandFirstText.lastIndexOf('}') +1)
@@ -56,11 +55,11 @@ export default function ChatboxExpanded() {
           style={{ backgroundColor: state.chatBoxExpandedTextBgColor }}
         >
           <p className="bodyText" style={{color: state.chatBoxExpandedTextColor}}>
-            {state.chatBoxExpandedParagraphOneText}
+            {state.chatBoxExpandedParagraphOneText} <a className="tooltipIcon"></a>
           </p>
           <p className="bodyText" style={{color: state.chatBoxExpandedTextColor}}>
             Your total emissions are higher than average because you live in
-            Australia, whose energy is still predominantly fossil generated.
+            Australia, whose energy is still predominantly fossil generated. <a className="tooltipIcon"></a>
           </p>
         </div>
       </div>
