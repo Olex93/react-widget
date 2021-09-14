@@ -1,16 +1,64 @@
-
-
 .chatbox-wrapper {
-    box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    right: 5%;
-    width: 300px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  width: 300px;
 
-    &.expanded {
-        height: 600px;
+  &.expanded {
+    padding: 0;
+    margin: 0;
+    -webkit-box-shadow: 0px 0px 14px 3px #bcbcbc;
+    box-shadow: 0px 0px 14px 3px #bcbcbc;
+    border-radius: 10px 10px 0 0;
+
+    .headerSection {
+      border-width: 15px 15px 0 15px;
+      border-style: solid;
+      border-radius: 10px 10px 0 0;
+      .heading {
+        margin: 0;
+        padding: 20px 10px 35px 10px;
+        text-align: center;
+        font-size: 35px;
+      }
     }
-    &.collapsed {
-        height: 100px;
+    .standFirstSection,
+    .bodyTextSection {
+      border-width: 0px 15px;
+      border-style: solid;
+
+      .standFirstInner {
+        padding: 30px 20px 10px 20px;
+        border-radius: 10px 10px 0 0;
+        border-width: 1px;
+
+        .standFirstText {
+          font-size: 1.25rem;
+          line-height: 1.875rem;
+          font-weight: bold;
+        }
+
+        .standFirstText {
+          margin: 0;
+        }
+      }
+
+      .bodyTextInner {
+        padding: 15px 20px 10px 20px;
+        border-radius: 0 0 10px 10px;
+        border: 1px solid transparent;
+
+        .bodyText {
+          margin: 0 0 15px 0;
+        }
+      }
     }
+  }
+  &.collapsed {
+    -webkit-box-shadow: 0px 0px 14px 3px #bcbcbc;
+    box-shadow: 0px 0px 14px 3px #bcbcbc;
+    background-color: transparent;
+    border-radius: 15px 15px 0 0;
+  }
 }
