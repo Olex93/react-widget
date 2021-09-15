@@ -27,6 +27,7 @@ export default function ExpandCollapseToggle(props) {
       style={{
         borderColor: state.chatBoxCollapsedBorderColor,
         backgroundColor: state.chatBoxCollapsedBorderColor,
+        borderRadius: state.chatboxExpanded ? 0 : '15px 15px 0 0'
       }}
     >
       <button
