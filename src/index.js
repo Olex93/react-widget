@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Find all widget divs
 const WidgetDivs = document.querySelectorAll('.clickNeutral_Widget')

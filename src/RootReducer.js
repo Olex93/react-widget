@@ -43,10 +43,9 @@ const Reducer = (state, action) => {
     case "COLLAPSED_CHATBOX_STYLE":
       return {
         ...state,
-        chatBoxCollapsedBg: action.chatBoxCollapsedBg,
-        chatBoxCollapsedBorderColor: action.chatBoxCollapsedBorderColor,
-        chatBoxCollapsedFontColor: action.chatBoxCollapsedFontColor,
-        chatBoxCollapsedLogoColor: action.chatBoxCollapsedLogoColor,
+        collapsedBackgroundColor: action.collapsedBackgroundColor,
+        lowerFrameColor: action.lowerFrameColor,
+        logoColor: action.logoColor,
       };
 
     case "EXPANDED_CHATBOX_STYLE":

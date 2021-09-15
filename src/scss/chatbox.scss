@@ -52,6 +52,8 @@
         .bodyText {
           margin: 0 0 15px 0;
           position: relative;
+          line-height: 1.5rem;
+          font-size: 1rem;
 
           .tooltipIcon {
             height: 17px;
@@ -70,6 +72,14 @@
               top: 50%;
               transform: translateY(-50%);
             }
+          }
+          .infoIcon {
+            width: 17px;
+            height: 17px;
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }

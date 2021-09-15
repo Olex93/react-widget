@@ -1,9 +1,10 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import Reducer from "./RootReducer";
+// import Reducer from "./RootReducer";
 
 
 // FOURLEAF INITIAL
 const initialState = {
+  domainID:'',
   widgetType: 'chatBox',
   authToken:'',
   ipAddress:'',
@@ -13,25 +14,25 @@ const initialState = {
   cityFromIp: '',
   chatboxExpanded: false,
   bodyFont: 'Arial, Helvetica, sans-serif',
-  headingFont: null,
-  //COLLAPSED CHATBOX VARS
-  chatBoxCollapsedBg: '#ffffff',
-  chatBoxCollapsedBorderColor: '#e1e8ec',
-  chatBoxCollapsedFontColor: '#002b49',
-  chatBoxCollapsedLogoColor: '#29ad9c',
-  //EXPANDED CHATBOX VARS
-  chatBoxExpandedTitleText:'Did you know?',
-  chatBoxExpandedTitleColor: '#ffffff',
-  chatBoxExpandedFrameTopBg: '#29ad9c',
-  chatBoxExpandedFrameBottomBg: '#e1e8ec',
-  chatBoxExpandedTextBgColor: '#ffffff',
-  chatBoxExpandedTextColor:'#002b49',
-  chatBoxExpandedTextHighlightColor: '#29ad9c',
-  chatBoxExpandedIconColor: '#f1563f',
+  titleFont: "Arial, Helvetica, sans-serif",
+  standFirstFont:"Arial, Helvetica, sans-serif",
+  collapsedBackgroundColor: '#ffffff',
+  lowerFrameColor: '#e1e8ec',
+  collapsedForegroundColor: '#002b49',
+  logoColor: '#29ad9c',
+  showTitle:true,
+  title:'Did you know?',
+  titleColor: '#ffffff',
+  upperFrameColor: '#29ad9c',
+  expandedBackgroundColor: '#ffffff',
+  standFirstForegroundColor: '#002b49',
+  bodyForegroundColor:'#002b49',
+  standFirstAccentColor: '#29ad9c',
+  iconColor: '#f1563f',
   chatBoxExpandedCo2Today: '5g CO2e',
   chatBoxExpandedCo2Total: '1.96kg CO2e',
-  chatBoxExpandedStandFirstText: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
-  chatBoxExpandedParagraphOneText: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
+  standFirst: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
+  body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
 };
 
 // const initialState = {
@@ -44,25 +45,26 @@ const initialState = {
 //   cityFromIp: '',
 //   chatboxExpanded: false,
 //   bodyFont: 'Arial, Helvetica, sans-serif',
-//   headingFont: 'Verdana, Geneva, Tahoma, sans-serif',
+//   titleFont: 'Verdana, Geneva, Tahoma, sans-serif',
+//   standFirstFont:"Arial, Helvetica, sans-serif",
 //   //COLLAPSED CHATBOX VARS
-//   chatBoxCollapsedBg: '#ffffff',
-//   chatBoxCollapsedBorderColor: '#001514',
-//   chatBoxCollapsedFontColor: '#221D23',
-//   chatBoxCollapsedLogoColor: '#B76914',
+//   collapsedBackgroundColor: '#ffffff',
+//   lowerFrameColor: '#001514',
+//   collapsedForegroundColor: '#221D23',
+//   logoColor: '#B76914',
 //   //EXPANDED CHATBOX VARS
-//   chatBoxExpandedTitleText:'Did you know?',
-//   chatBoxExpandedTitleColor: '#ffffff',
-//   chatBoxExpandedFrameTopBg: '#B76914',
-//   chatBoxExpandedFrameBottomBg: '#001514',
-//   chatBoxExpandedTextBgColor: '#ffffff',
-//   chatBoxExpandedTextColor:'#221D23',
-//   chatBoxExpandedTextHighlightColor: '#B76914',
-//   chatBoxExpandedIconColor: '#6B0504',
+//   title:'Did you know?',
+//   titleColor: '#ffffff',
+//   upperFrameColor: '#B76914',
+//   lowerFrameColor: '#001514',
+//   expandedBackgroundColor: '#ffffff',
+//   bodyForegroundColor:'#221D23',
+//   standFirstAccentColor: '#B76914',
+//   iconColor: '#6B0504',
 //   chatBoxExpandedCo2Today: '5g CO2e',
 //   chatBoxExpandedCo2Total: '1.96kg CO2e',
-//   chatBoxExpandedStandFirstText: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
-//   chatBoxExpandedParagraphOneText: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
+//   standFirst: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
+//   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
 // };
 
 

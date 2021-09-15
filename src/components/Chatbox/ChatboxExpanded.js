@@ -1,65 +1,95 @@
 import React, { useContext } from "react";
 import { Context } from "../../Store";
 import ExpandCollapseToggle from "../ExpandCollapseToggle";
+import InfoIcon from "../svgs/InfoIcon";
 
 export default function ChatboxExpanded() {
   const [state] = useContext(Context);
 
   // const processedString = state.chatBoxExpandedStandFirstText.replace('{today}', <StringSpan text={state.chatBoxExpandedCo2Today} />).replace('{total}', state.chatBoxExpandedCo2Total)
-  const stringStart = state.chatBoxExpandedStandFirstText.substring(0, state.chatBoxExpandedStandFirstText.indexOf('{'))
-  const stringMiddle = state.chatBoxExpandedStandFirstText.substring(state.chatBoxExpandedStandFirstText.indexOf('}') +1 , state.chatBoxExpandedStandFirstText.lastIndexOf('{'))
-  const stringEnd = state.chatBoxExpandedStandFirstText.substring(state.chatBoxExpandedStandFirstText.lastIndexOf('}') +1)
- 
+  const stringStart = state.standFirst.substring(
+    0,
+    state.standFirst.indexOf("{")
+  );
+  const stringMiddle = state.standFirst.substring(
+    state.standFirst.indexOf("}") + 1,
+    state.standFirst.lastIndexOf("{")
+  );
+  const stringEnd = state.standFirst.substring(
+    state.standFirst.lastIndexOf("}") + 1
+  );
 
   return (
     <div fluid className="expanded chatbox-wrapper">
       <div
         className="headerSection"
         style={{
-          backgroundColor: state.chatBoxExpandedFrameTopBg,
-          borderColor: state.chatBoxExpandedFrameTopBg,
+          backgroundColor: state.upperFrameColor,
+          borderColor: state.upperFrameColor,
         }}
       >
-        <p
-          className="heading"
-          style={{
-            color: state.chatBoxExpandedTitleColor,
-            fontFamily: state.headingFont ? state.headingFont : state.bodyFont,
-          }}
-        >
-          Did you know?
-        </p>
+        {state.showTitle === true && (
+          <p
+            className="heading"
+            style={{
+              color: state.titleColor,
+              fontFamily: state.titleFont,
+            }}
+          >
+            {state.title}
+          </p>
+        )}
       </div>
       <div
         className="standFirstSection"
         style={{
-          borderColor: state.chatBoxExpandedFrameTopBg,
-          backgroundColor: state.chatBoxExpandedFrameTopBg,
+          borderColor: state.upperFrameColor,
+          backgroundColor: state.upperFrameColor,
         }}
       >
         <div
           className="standFirstInner"
-          style={{ backgroundColor: state.chatBoxExpandedTextBgColor }}
+          style={{ backgroundColor: state.expandedBackgroundColor }}
         >
-          <p className="standFirstText" style={{color: state.chatBoxExpandedTextColor}}>
-            {stringStart} <span style={{color: state.chatBoxExpandedTextHighlightColor}}>{state.chatBoxExpandedCo2Today}</span>{stringMiddle} <span style={{color: state.chatBoxExpandedTextHighlightColor}}>{state.chatBoxExpandedCo2Total}</span>{stringEnd}
+          <p
+            className="standFirstText"
+            style={{
+              color: state.standFirstForegroundColor,
+              fontFamily: state.standFirstFont,
+            }}
+          >
+            {stringStart}{" "}
+            <span style={{ color: state.standFirstAccentColor }}>
+              {state.chatBoxExpandedCo2Today}
+            </span>
+            {stringMiddle}{" "}
+            <span style={{ color: state.standFirstAccentColor }}>
+              {state.chatBoxExpandedCo2Total}
+            </span>
+            {stringEnd}
           </p>
         </div>
       </div>
       <div
         className="bodyTextSection"
-        style={{ borderColor: state.chatBoxExpandedFrameBottomBg, backgroundColor: state.chatBoxExpandedFrameBottomBg }}
+        style={{
+          borderColor: state.lowerFrameColor,
+          backgroundColor: state.lowerFrameColor,
+        }}
       >
         <div
           className="bodyTextInner"
-          style={{ backgroundColor: state.chatBoxExpandedTextBgColor }}
+          style={{ backgroundColor: state.expandedBackgroundColor }}
         >
-          <p className="bodyText" style={{color: state.chatBoxExpandedTextColor}}>
-            {state.chatBoxExpandedParagraphOneText} <a className="tooltipIcon"></a>
+          <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
+            {state.body}{" "}
+            <a className="tooltipIcon"></a>
           </p>
-          <p className="bodyText" style={{color: state.chatBoxExpandedTextColor}}>
+          <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
             Your total emissions are higher than average because you live in
-            Australia, whose energy is still predominantly fossil generated. <a className="tooltipIcon"></a>
+            Australia, whose energy is still predominantly fossil generated.{" "}
+            {/* <a className="tooltipIcon"></a> */}
+            <span class="infoIcon"><InfoIcon /></span>
           </p>
         </div>
       </div>
