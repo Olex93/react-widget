@@ -55,31 +55,12 @@
           line-height: 1.5rem;
           font-size: 1rem;
 
-          .tooltipIcon {
-            height: 17px;
-            width: 17px;
-            position: relative;
-            margin-left: 10px;
-            &:hover,
-            &:focus {
-              cursor: pointer;
-            }
-            &::after {
-              content: url("../images/tooltip-icon-TEMP.png");
-              height: 100%;
-              width: 100%;
-              position: absolute;
-              top: 50%;
-              transform: translateY(-50%);
-            }
-          }
           .infoIcon {
             width: 17px;
             height: 17px;
             position: relative;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
           }
         }
       }

@@ -8,7 +8,7 @@ import {Store} from "./Store";
 function App({ domElement }) {
   return (
     <Store>
-      <RootComponent domElement={domElement} />;
+      <RootComponent domElement={domElement} />
     </Store>
   );
 }

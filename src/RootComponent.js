@@ -22,26 +22,66 @@ export default function RootComponent(props) {
 
   let resourceSizes = [];
 
+
   useEffect(() => {
     setLoading(true);
 
-    console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
+    // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
     //Fetch country and city of the end user
-    fetch("https://extreme-ip-lookup.com/json/")
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response.country, response.city, response.query);
-        dispatch({
-          type: "SET_LOCATION",
-          country: response.country,
-          city: response.city,
-        });
-        dispatch({ type: "SET_IP_ADDRESS", payload: response.query });
+    // fetch("https://extreme-ip-lookup.com/json/")
+    //   .then((res) => res.json())
+    //   .then((response) => {
+    //     console.log(response.country, response.city, response.query);
+    //     dispatch({
+    //       type: "SET_LOCATION",
+    //       country: response.country,
+    //       city: response.city,
+    //     });
+    //     dispatch({ type: "SET_IP_ADDRESS", payload: response.query });
+    //   })
+    //   .catch((data, status) => {
+    //     console.log("Unable to find location");
+    //   });
+
+      axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/C092F5F4-CE2E-47AD-93A8-CA14B0C65F38', {
+        headers: {
+          'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
+        }
+      }).then(response => {
+        console.log(response.data);
+        dispatch(
+          { 
+          domainID: response.data.domainID,
+          placementID: response.data.placementID,
+          collapsedStyleID: response.data.collapsedStyleID,
+          collapsedBackgroundColor: response.data.collapsedBackgroundColor,
+          collapsedForegroundColor: response.data.collapsedForegroundColor,
+          expandedBackgroundColor: response.data.expandedBackgroundColor,
+          upperFrameColor: response.data.upperFrameColor,
+          lowerFrameColor:response.data.lowerFrameColor,
+          showTitle: response.data.showTitle,
+          titleColor: response.data.titleColor,
+          standFirstForegroundColor:response.data.standFirstForegroundColor,
+          standFirstAccentColor:response.data.standFirstAccentColor,
+          bodyForegroundColor: response.data.bodyForegroundColor,
+          iconColor:response.data.iconColor,
+          logoColor: response.data.logoColor,
+          titleFont: response.data.titleFont,
+          standFirstFont: response.data.standFirstFont,
+          bodyFont: response.data.bodyFont,
+          title: response.data.title,
+          standFirst: response.data.standFirst,
+          body: response.data.body,
+          domain: response.data.domain,
+         }
+         );
+         
       })
-      .catch((data, status) => {
-        console.log("Unable to find location");
+      .catch((error) => {
+        console.log(error);
       });
+
 
     //Make POST request to the .NET API, then ...
     axios
@@ -91,10 +131,10 @@ export default function RootComponent(props) {
 
       {!loading && !error && (
         <>
-          {state.widgetType === "chatBox" && <Chatbox />}
-          {state.widgetType === "topBar" && <Topbar />}
-          {state.widgetType === "footer" && <Footer />}
-          {state.widgetType === "iframeEmbed" && <Iframe />}
+          {state.placementID === 3 && <Chatbox />}
+          {state.placementID === 1 && <Topbar />}
+          {state.placementID === 4 && <Footer />}
+          {state.placementID === 5 && <Iframe />}
         </>
       )}
     </>

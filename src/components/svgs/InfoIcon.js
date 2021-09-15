@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
+import { Context } from "../../Store";
 
 export default function InfoIcon() {
+  const [state] = useContext(Context);
+
   return (
     <>
       <svg
@@ -10,10 +13,10 @@ export default function InfoIcon() {
         x="0px"
         y="0px"
         viewBox="0 0 17 17"
-        style={{ enableBackground: "new 0 0 17 17", display:'inline', height: '17px', width:'17px', display: 'flex' }}
+        style={{ enableBackground: "new 0 0 17 17", display:'inline', height: '17px', width:'17px', position: 'absolute', lefT: 0, top:'50%', transform:'translateY(-50%)'  }}
       >
         <g>
-          <rect fill="#F1563F" width="17" height="17" />
+          <rect fill={state.iconColor} width="17" height="17" />
         </g>
         <g>
           <path

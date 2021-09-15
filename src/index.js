@@ -12,5 +12,5 @@ WidgetDivs.forEach(Div => {
       <App domElement={Div} />
     </React.StrictMode>,
     Div
-  );
+  )
 })

@@ -82,14 +82,18 @@ export default function ChatboxExpanded() {
           style={{ backgroundColor: state.expandedBackgroundColor }}
         >
           <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
-            {state.body}{" "}
-            <a className="tooltipIcon"></a>
+            {state.body} {/* <a className="tooltipIcon"></a> */}
+            <span className="infoIcon">
+              <InfoIcon />
+            </span>
           </p>
           <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
             Your total emissions are higher than average because you live in
             Australia, whose energy is still predominantly fossil generated.{" "}
             {/* <a className="tooltipIcon"></a> */}
-            <span class="infoIcon"><InfoIcon /></span>
+            <span className="infoIcon">
+              <InfoIcon />
+            </span>
           </p>
         </div>
       </div>
