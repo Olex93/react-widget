@@ -8,15 +8,18 @@ export default function ExpandCollapseToggle(props) {
 
   const ToggleChatbox = () => {
     if (state.chatboxExpanded === true) {
-      dispatch({
-        type: "TOGGLE_CHATBOX",
-        payload: false,
-      });
+      // dispatch({
+      //   type: "TOGGLE_CHATBOX",
+      //   payload: false,
+      // });
+      dispatch({'chatboxExpanded': false})
     } else {
-      dispatch({
-        type: "TOGGLE_CHATBOX",
-        payload: true,
-      });
+      // dispatch({
+      //   type: "TOGGLE_CHATBOX",
+      //   payload: true,
+      // });
+      dispatch({'chatboxExpanded': true})
+
     }
   };
 

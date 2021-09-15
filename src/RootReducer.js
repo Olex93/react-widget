@@ -1,3 +1,4 @@
+//THIS FILE IS REDUNDANT AND NOT CURRENTLY BEING USED
 const Reducer = (state, action) => {
   switch (action.type) {
     //GENERAL SETUP VARS
