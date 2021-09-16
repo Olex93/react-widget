@@ -14,7 +14,8 @@ export default function RootComponent(props) {
 
   if(window) {
     console.log('Logging')
-    console.log(props.domElement)
+    console.log(props.domElement.productKey)
+    console.log(props.domElement.className)
 
   }
 
