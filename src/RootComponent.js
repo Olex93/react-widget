@@ -16,9 +16,9 @@ export default function RootComponent(props) {
 
   const widgetElement = props.domElement
 
-  console.log(widgetElement.productKey)
+  console.log('Product key: ' + widgetElement.productKey)
   // dispatch( domainID: props.)
-  console.log(props.domElement)
+  // console.log(props.domElement)
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
   // const [ipAddress, setIpAddress] = useState("");
@@ -125,7 +125,7 @@ export default function RootComponent(props) {
         //calculate the combined total size of resources in kb
         const totalPageResourceSize =
           resourceSizes.reduce((a, b) => a + b, 0) / 1000;
-        console.log(totalPageResourceSize);
+        console.log('Total page resources: ' + totalPageResourceSize);
 
         dispatch({
           type: "SET_TOTAL_PAGE_SIZE",
