@@ -12,15 +12,11 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
 
-  // console.log(props.domElement)
+  if(window) {
+    console.log('Logging')
+    console.log(props.domElement)
 
-  const widgetElement = props.domElement
-
-  // const productKey = widgetElement.getElementById('clickNeutral_Widget')
-  
-  console.log(widgetElement)
-  console.log(widgetElement.productKey)
-  // dispatch( domainID: props.)
+  }
 
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
