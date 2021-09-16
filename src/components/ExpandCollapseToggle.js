@@ -39,7 +39,7 @@ export default function ExpandCollapseToggle(props) {
         }}
         onClick={ToggleChatbox}
       >
-        <span>Offsetting your visit</span>
+        <span style={{color: state.collapsedForegroundColor}}>Offsetting your visit</span>
         {/* <img
           src={ClickNeutralLogo}
           alt="ClickNeutral logo"

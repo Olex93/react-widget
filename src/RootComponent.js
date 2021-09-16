@@ -45,38 +45,44 @@ export default function RootComponent(props) {
     //   });
 
       axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/C092F5F4-CE2E-47AD-93A8-CA14B0C65F38', {
-        headers: {
-          'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
+      // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
+      // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
+
+      headers: {
+          // 'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
+          // 'ProductKey': '1B9AB9FC-3879-4278-9E20-D069E5AE5604'
+          'ProductKey': '14F961E4-363C-4D83-9926-CAC84CC32427'
         }
       }).then(response => {
         console.log(response.data);
-        dispatch(
-          { 
-          domainID: response.data.domainID,
-          placementID: response.data.placementID,
-          collapsedStyleID: response.data.collapsedStyleID,
-          collapsedBackgroundColor: response.data.collapsedBackgroundColor,
-          collapsedForegroundColor: response.data.collapsedForegroundColor,
-          expandedBackgroundColor: response.data.expandedBackgroundColor,
-          upperFrameColor: response.data.upperFrameColor,
-          lowerFrameColor:response.data.lowerFrameColor,
-          showTitle: response.data.showTitle,
-          titleColor: response.data.titleColor,
-          standFirstForegroundColor:response.data.standFirstForegroundColor,
-          standFirstAccentColor:response.data.standFirstAccentColor,
-          bodyForegroundColor: response.data.bodyForegroundColor,
-          iconColor:response.data.iconColor,
-          logoColor: response.data.logoColor,
-          titleFont: response.data.titleFont,
-          standFirstFont: response.data.standFirstFont,
-          bodyFont: response.data.bodyFont,
-          title: response.data.title,
-          standFirst: response.data.standFirst,
-          body: response.data.body,
-          domain: response.data.domain,
-         }
-         );
-         
+        if (response.data) {
+          dispatch(
+            { 
+            domainID: response.data.domainID,
+            placementID: response.data.placementID,
+            collapsedStyleID: response.data.collapsedStyleID,
+            collapsedBackgroundColor: response.data.collapsedBackgroundColor,
+            collapsedForegroundColor: response.data.collapsedForegroundColor,
+            expandedBackgroundColor: response.data.expandedBackgroundColor,
+            upperFrameColor: response.data.upperFrameColor,
+            lowerFrameColor:response.data.lowerFrameColor,
+            showTitle: response.data.showTitle,
+            titleColor: response.data.titleColor,
+            standFirstForegroundColor:response.data.standFirstForegroundColor,
+            standFirstAccentColor:response.data.standFirstAccentColor,
+            bodyForegroundColor: response.data.bodyForegroundColor,
+            iconColor:response.data.iconColor,
+            logoColor: response.data.logoColor,
+            titleFont: response.data.titleFont,
+            standFirstFont: response.data.standFirstFont,
+            bodyFont: response.data.bodyFont,
+            title: response.data.title,
+            standFirst: response.data.standFirst,
+            body: response.data.body,
+            domain: response.data.domain,
+           }
+           );
+        }
       })
       .catch((error) => {
         console.log(error);
