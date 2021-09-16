@@ -16,9 +16,10 @@ export default function RootComponent(props) {
 
   const widgetElement = props.domElement
 
-  const productKey = widgetElement.getElementById('clickNeutral_Widget').dataset.ProductKey
+  // const productKey = widgetElement.getElementById('clickNeutral_Widget')
+  
 
-  console.log(productKey)
+  console.log(widgetElement.productKey)
   // dispatch( domainID: props.)
 
   const [loading, setLoading] = useState();
