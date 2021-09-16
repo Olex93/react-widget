@@ -16,9 +16,10 @@ export default function RootComponent(props) {
 
   const widgetElement = props.domElement
 
-  console.log('Product key: ' + widgetElement.productKey)
+  console.log(widgetElement.dataset.productKey)
+  
   // dispatch( domainID: props.)
-  // console.log(props.domElement)
+
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
   // const [ipAddress, setIpAddress] = useState("");
