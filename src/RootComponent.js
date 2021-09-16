@@ -25,7 +25,7 @@ export default function RootComponent(props) {
 
   const productKey = props.domElement.dataset["productkey"]
   dispatch({domainID: productKey})
-  const urlString = 'https://clickneutral.fourleafsecure.co.uk/api/widget/config/' + domainID
+  const urlString = 'https://clickneutral.fourleafsecure.co.uk/api/widget/config/' + state.domainID
   console.log(urlString)
 
   let resourceSizes = [];
