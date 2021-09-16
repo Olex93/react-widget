@@ -11,6 +11,14 @@ import axios from "axios";
 import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
+
+  // console.log(props.domElement)
+
+  const widgetElement = props.domElement
+
+  console.log(widgetElement.productKey)
+  // dispatch( domainID: props.)
+  console.log(props.domElement)
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
   // const [ipAddress, setIpAddress] = useState("");
