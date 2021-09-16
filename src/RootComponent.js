@@ -12,31 +12,19 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
 
-  console.log(props.domElement.dataset["productkey"])
-
-  // if (document) {
-  //   console.log('Looping through string and object')
-  //   const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
-    
-  //   console.log(props.domElement.dataset["productkey"])
-
-  //   for (var i = 0; i < widgetsArray.length; i++) {
-  //     console.log(JSON.stringify(widgetsArray[i].dataset));
-  //     console.log(widgetsArray[i].dataset.productKey)
-  //     const stringified = JSON.stringify(widgetsArray[i].dataset)
-  //     console.log(stringified.productKey)
-
-  //   }
-  // }
-
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
+
+  //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
   const [state, dispatch] = useContext(Context);
+
+  const productKey = props.domElement.dataset["productkey"]
+  dispatch({domainID: productKey})
 
   let resourceSizes = [];
 
@@ -63,7 +51,7 @@ export default function RootComponent(props) {
 
     axios
       .get(
-        "https://clickneutral.fourleafsecure.co.uk/api/widget/config/C092F5F4-CE2E-47AD-93A8-CA14B0C65F38",
+        `https://clickneutral.fourleafsecure.co.uk/api/widget/config/${state.productKey}`,
         {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
@@ -71,7 +59,7 @@ export default function RootComponent(props) {
           headers: {
             // 'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
             // 'ProductKey': '1B9AB9FC-3879-4278-9E20-D069E5AE5604'
-            ProductKey: "14F961E4-363C-4D83-9926-CAC84CC32427",
+            ProductKey: state.productKey,
           },
         }
       )
@@ -79,7 +67,6 @@ export default function RootComponent(props) {
         console.log(response.data);
         if (response.data) {
           dispatch({
-            domainID: response.data.domainID,
             placementID: response.data.placementID,
             collapsedStyleID: response.data.collapsedStyleID,
             collapsedBackgroundColor: response.data.collapsedBackgroundColor,
