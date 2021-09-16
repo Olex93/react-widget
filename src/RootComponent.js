@@ -18,7 +18,7 @@ export default function RootComponent(props) {
 
   // const productKey = widgetElement.getElementById('clickNeutral_Widget')
   
-
+  console.log(widgetElement)
   console.log(widgetElement.productKey)
   // dispatch( domainID: props.)
 
