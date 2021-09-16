@@ -13,8 +13,8 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 export default function RootComponent(props) {
 
   if(window) {
-    console.log('Stringified')
-    console.logJSON.stringify((props.domElement.dataset.productKey))
+    console.log('Stringified again')
+    console.log(JSON.stringify((props.domElement.dataset.productKey)))
     console.log(props.domElement.className)
 
   }
