@@ -23,15 +23,15 @@ export default function RootComponent(props) {
 
   const [state, dispatch] = useContext(Context);
 
-  const productKey = props.domElement.dataset["productkey"]
-  dispatch({domainID: productKey})
-  const urlString = 'https://clickneutral.fourleafsecure.co.uk/api/widget/config/' + state.domainID
-  console.log(urlString)
-
   let resourceSizes = [];
 
   useEffect(() => {
     setLoading(true);
+
+    //Set domain ID to key taken from script passed in from DOM
+    const productKey = props.domElement.dataset["productkey"]
+    dispatch({domainID: productKey})
+
 
     // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
@@ -51,9 +51,7 @@ export default function RootComponent(props) {
     //     console.log("Unable to find location");
     //   });
 
-    axios
-      .get(
-        `urlString`, {
+          axios.get(`https://clickneutral.fourleafsecure.co.uk/api/widget/config/${state.domainID}`, {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
 
