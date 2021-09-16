@@ -11,23 +11,23 @@ import axios from "axios";
 import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
-  if (document) {
-    console.log('Looping through string and object')
-    const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
-    for (var i = 0; i < widgetsArray.length; i++) {
-      console.log(JSON.stringify(widgetsArray[i].dataset));
-      console.log(widgetsArray[i].dataset.productKey)
-      const stringified = JSON.stringify(widgetsArray[i].dataset)
-      console.log(stringified.productKey)
 
-    }
+  console.log(props.domElement.dataset["productkey"])
 
-  
+  // if (document) {
+  //   console.log('Looping through string and object')
+  //   const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
+    
+  //   console.log(props.domElement.dataset["productkey"])
 
-    // console.log("Stringified again");
-    // console.log(JSON.stringify(props.domElement.dataset.productKey));
-    // console.log(props.domElement.className);
-  }
+  //   for (var i = 0; i < widgetsArray.length; i++) {
+  //     console.log(JSON.stringify(widgetsArray[i].dataset));
+  //     console.log(widgetsArray[i].dataset.productKey)
+  //     const stringified = JSON.stringify(widgetsArray[i].dataset)
+  //     console.log(stringified.productKey)
+
+  //   }
+  // }
 
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
