@@ -16,7 +16,12 @@ export default function RootComponent(props) {
     const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
     for (var i = 0; i < widgetsArray.length; i++) {
       console.log(JSON.stringify(widgetsArray[i].dataset));
+      const stringified = JSON.stringify(widgetsArray[i].dataset)
+      console.log(JSON.parse(stringified.productKey))
+      
     }
+
+  
 
     // console.log("Stringified again");
     // console.log(JSON.stringify(props.domElement.dataset.productKey));
