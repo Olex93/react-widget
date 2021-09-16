@@ -12,10 +12,11 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
   if (document) {
-    console.log('Looping to string')
+    console.log('Looping through string and object')
     const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
     for (var i = 0; i < widgetsArray.length; i++) {
       console.log(JSON.stringify(widgetsArray[i].dataset));
+      console.log(widgetsArray[i].dataset.productKey)
       const stringified = JSON.stringify(widgetsArray[i].dataset)
       console.log(stringified.productKey)
 
