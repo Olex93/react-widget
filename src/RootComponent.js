@@ -11,12 +11,16 @@ import axios from "axios";
 import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
+  if (document) {
+    console.log('Looping')
+    const widgetsArray = document.getElementsByClassName("clickNeutral_Widget");
+    for (var i = 0; i < widgetsArray.length; i++) {
+      console.log(JSON.stringify(widgetsArray[i].dataset));
+    }
 
-  if(window) {
-    console.log('Stringified again')
-    console.log(JSON.stringify((props.domElement.dataset.productKey)))
-    console.log(props.domElement.className)
-
+    // console.log("Stringified again");
+    // console.log(JSON.stringify(props.domElement.dataset.productKey));
+    // console.log(props.domElement.className);
   }
 
   const [loading, setLoading] = useState();
@@ -29,7 +33,6 @@ export default function RootComponent(props) {
   const [state, dispatch] = useContext(Context);
 
   let resourceSizes = [];
-
 
   useEffect(() => {
     setLoading(true);
@@ -52,20 +55,24 @@ export default function RootComponent(props) {
     //     console.log("Unable to find location");
     //   });
 
-      axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/C092F5F4-CE2E-47AD-93A8-CA14B0C65F38', {
-      // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
-      // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
+    axios
+      .get(
+        "https://clickneutral.fourleafsecure.co.uk/api/widget/config/C092F5F4-CE2E-47AD-93A8-CA14B0C65F38",
+        {
+          // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
+          // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
 
-      headers: {
-          // 'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
-          // 'ProductKey': '1B9AB9FC-3879-4278-9E20-D069E5AE5604'
-          'ProductKey': '14F961E4-363C-4D83-9926-CAC84CC32427'
+          headers: {
+            // 'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
+            // 'ProductKey': '1B9AB9FC-3879-4278-9E20-D069E5AE5604'
+            ProductKey: "14F961E4-363C-4D83-9926-CAC84CC32427",
+          },
         }
-      }).then(response => {
+      )
+      .then((response) => {
         console.log(response.data);
         if (response.data) {
-          dispatch(
-            { 
+          dispatch({
             domainID: response.data.domainID,
             placementID: response.data.placementID,
             collapsedStyleID: response.data.collapsedStyleID,
@@ -73,13 +80,13 @@ export default function RootComponent(props) {
             collapsedForegroundColor: response.data.collapsedForegroundColor,
             expandedBackgroundColor: response.data.expandedBackgroundColor,
             upperFrameColor: response.data.upperFrameColor,
-            lowerFrameColor:response.data.lowerFrameColor,
+            lowerFrameColor: response.data.lowerFrameColor,
             showTitle: response.data.showTitle,
             titleColor: response.data.titleColor,
-            standFirstForegroundColor:response.data.standFirstForegroundColor,
-            standFirstAccentColor:response.data.standFirstAccentColor,
+            standFirstForegroundColor: response.data.standFirstForegroundColor,
+            standFirstAccentColor: response.data.standFirstAccentColor,
             bodyForegroundColor: response.data.bodyForegroundColor,
-            iconColor:response.data.iconColor,
+            iconColor: response.data.iconColor,
             logoColor: response.data.logoColor,
             titleFont: response.data.titleFont,
             standFirstFont: response.data.standFirstFont,
@@ -88,14 +95,12 @@ export default function RootComponent(props) {
             standFirst: response.data.standFirst,
             body: response.data.body,
             domain: response.data.domain,
-           }
-           );
+          });
         }
       })
       .catch((error) => {
         console.log(error);
       });
-
 
     //Make POST request to the .NET API, then ...
     axios
@@ -125,7 +130,7 @@ export default function RootComponent(props) {
         //calculate the combined total size of resources in kb
         const totalPageResourceSize =
           resourceSizes.reduce((a, b) => a + b, 0) / 1000;
-        console.log('Total page resources: ' + totalPageResourceSize);
+        console.log("Total page resources: " + totalPageResourceSize);
 
         dispatch({
           type: "SET_TOTAL_PAGE_SIZE",
