@@ -25,6 +25,8 @@ export default function RootComponent(props) {
 
   const productKey = props.domElement.dataset["productkey"]
   dispatch({domainID: productKey})
+  const urlString = 'https://clickneutral.fourleafsecure.co.uk/api/widget/config/' + domainID
+  console.log(urlString)
 
   let resourceSizes = [];
 
@@ -51,15 +53,14 @@ export default function RootComponent(props) {
 
     axios
       .get(
-        `https://clickneutral.fourleafsecure.co.uk/api/widget/config/${state.productKey}`,
-        {
+        `urlString`, {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/1B9AB9FC-3879-4278-9E20-D069E5AE5604', {
           // axios.get('https://clickneutral.fourleafsecure.co.uk/api/widget/config/14F961E4-363C-4D83-9926-CAC84CC32427', {
 
           headers: {
             // 'ProductKey': 'C092F5F4-CE2E-47AD-93A8-CA14B0C65F38'
             // 'ProductKey': '1B9AB9FC-3879-4278-9E20-D069E5AE5604'
-            ProductKey: state.productKey,
+            ProductKey: state.domainID,
           },
         }
       )
