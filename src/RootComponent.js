@@ -32,8 +32,10 @@ export default function RootComponent(props) {
     const previewMode = props.domElement.dataset["previewMode"];
 
     dispatch({ domainID: productKey });
+    dispatch({ previewMode: previewMode });
 
-    if (props.previewMode !== true) {
+
+    if (previewMode !== true) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
       //Fetch country and city of the end user
