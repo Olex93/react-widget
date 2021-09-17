@@ -20,7 +20,7 @@ export default function ChatboxExpanded() {
   );
 
   return (
-    <div fluid className={`expanded chatbox-wrapper ${state.domainID === true && 'pinnedToDiv'}`}>
+    <div fluid className={`expanded chatbox-wrapper ${state.domainID ? 'pinnedToDiv' : '' }`}>
       <div
         className="headerSection"
         style={{
