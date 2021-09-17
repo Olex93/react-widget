@@ -20,7 +20,7 @@ export default function ChatboxExpanded() {
   );
 
   return (
-    <div fluid className="expanded chatbox-wrapper" style={{position: state.domainID === "CnDemo" ? 'fixed' : 'absolute'}}>
+    <div fluid className="expanded chatbox-wrapper" style={{position: state.domainID === "CnDemo" ? 'fixed' : 'absolute', bottom: 0}}>
       <div
         className="headerSection"
         style={{
