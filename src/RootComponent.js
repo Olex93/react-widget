@@ -33,9 +33,9 @@ export default function RootComponent(props) {
 
     dispatch({ domainID: productKey });
     dispatch({ previewMode: previewMode });
+    console.log(previewMode)
 
-
-    if (previewMode !== true) {
+    if (previewMode !== "true") {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
       //Fetch country and city of the end user
