@@ -143,6 +143,8 @@ export default function RootComponent(props) {
           setLoading(false);
           setError("error fetching from api");
         });
+    } else {
+      setLoading(false)
     }
   }, []);
 
