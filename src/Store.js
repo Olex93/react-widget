@@ -80,7 +80,7 @@ let reducer = (state, newState) => {
 
 const localState = JSON.parse(localStorage.getItem("state"));
 
-const Context = React.createContext();
+const Context = createContext();
 
 function Store(props) {
   const [state, dispatch] = useReducer(reducer, localState || initialState);
