@@ -5,7 +5,7 @@ import "../scss/buttons.scss";
 
 export default function ExpandCollapseToggle(props) {
   const [state, dispatch] = useContext(Context);
-
+  
   const ToggleChatbox = () => {
     if (state.chatboxExpanded === true) {
       // dispatch({

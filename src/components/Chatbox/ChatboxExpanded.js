@@ -19,6 +19,7 @@ export default function ChatboxExpanded() {
     state.standFirst.lastIndexOf("}") + 1
   );
 
+  console.log('Preview mode from within collapsed: ' + state.previewMode)
   return (
     <div fluid className={"collapsed chatbox-wrapper" +  state.previewMode === true ? "pinnedToDiv" : "" }>
       <div
