@@ -20,7 +20,7 @@ export default function ChatboxExpanded() {
   );
 
   return (
-    <div fluid className={`expanded chatbox-wrapper ${state.previewMode === true ? "pinnedToDiv" : "" }`}>
+    <div fluid className={"collapsed chatbox-wrapper" +  state.previewMode === true ? "pinnedToDiv" : "" }>
       <div
         className="headerSection"
         style={{
