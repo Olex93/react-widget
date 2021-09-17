@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import ExpandCollapseToggle from "../ExpandCollapseToggle";
-import { Context } from "../Store";
+// import { Context } from "../Store";
 
 export default function ChatboxCollapsed() {
-  const [state] = useContext(Context);
+  // const [state] = useContext(Context);
 
   return (
     <div

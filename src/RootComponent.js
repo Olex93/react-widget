@@ -24,15 +24,14 @@ export default function RootComponent(props) {
 
   let resourceSizes = [];
 
-  
-  if (props.productKey !== "CnDemo") {
-    useEffect(() => {
-      setLoading(true);
+  useEffect(() => {
+    setLoading(true);
 
-      //Set domain ID to key taken from script passed in from DOM
-      const productKey = props.domElement.dataset["productkey"];
-      dispatch({ domainID: productKey });
+    //Set domain ID to key taken from script passed in from DOM
+    const productKey = props.domElement.dataset["productkey"];
+    dispatch({ domainID: productKey });
 
+    if (props.productKey !== "CnDemo") {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
       //Fetch country and city of the end user
@@ -138,11 +137,8 @@ export default function RootComponent(props) {
           setLoading(false);
           setError("error fetching from api");
         });
-    }, []);
-  } else {
-    const productKey = props.domElement.dataset["productkey"];
-    dispatch({ domainID: productKey });
-  }
+    }
+  }, []);
 
   return (
     <>
