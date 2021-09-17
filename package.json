@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
-    "node-sass": "^4.14.1",
     "preact": "^10.5.14",
     "preact-compat": "^3.19.0",
     "react": "^16.13.1",
@@ -36,11 +34,12 @@
     ]
   },
   "alias": {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
+    "react": "preact-compat",
+    "react-dom": "preact-compat"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "sass": "^1.36.0"
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.36.0",
+    "node-sass": "^4.14.1"
   }
 }
