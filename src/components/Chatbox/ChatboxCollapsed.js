@@ -9,11 +9,6 @@ export default function ChatboxCollapsed() {
     <div
       fluid
       className="collapsed chatbox-wrapper"
-      style={{
-        position: state.domainID !== "CnDemo" ? "fixed" : "absolute",
-        bottom: state.domainID === "CnDem0" && 0,
-        right: state.domainID === "CnDem0" && 0,
-      }}
     >
       <ExpandCollapseToggle />
     </div>
