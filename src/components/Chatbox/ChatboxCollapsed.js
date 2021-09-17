@@ -8,7 +8,7 @@ export default function ChatboxCollapsed() {
   return (
     <div
       fluid
-      className={"collapsed chatbox-wrapper" +  (state.domainID ? ' pinnedToDiv' : '' )}
+      className={"collapsed chatbox-wrapper " +  (state.domainID === true ? ' pinnedToDiv' : '' )}
     >
       <ExpandCollapseToggle />
     </div>
