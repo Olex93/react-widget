@@ -32,10 +32,11 @@ export default function RootComponent(props) {
     const previewMode = props.domElement.dataset["previewmode"];
     console.log(props.domElement)
 
+
     dispatch({ domainID: productKey });
     dispatch({ previewMode: previewMode });
     
-
+    console.log(previewMode)
      
     if (previewMode !== true) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
