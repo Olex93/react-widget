@@ -29,7 +29,7 @@ export default function RootComponent(props) {
 
     //Set domain ID to key taken from script passed in from DOM
     const productKey = props.domElement.dataset["productkey"];
-    const previewMode = props.domElement.dataset["previewMode"];
+    const previewMode = props.domElement.dataset["previewmode"];
     console.log(props.domElement)
 
     dispatch({ domainID: productKey });
