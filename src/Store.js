@@ -5,7 +5,7 @@ import React, { createContext, useReducer, useEffect } from "react";
 // FOURLEAF INITIAL
 const initialState = {
   domainID:'',
-  previewMode: false,
+  previewMode: Boolean,
   placementID: 3,
   collapsedStyleID:1,
   widgetType: 'chatBox',

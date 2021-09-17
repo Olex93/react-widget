@@ -4,7 +4,7 @@ import { Context } from "../../Store";
 
 export default function ChatboxCollapsed() {
   const [state] = useContext(Context);
-
+  console.log(state.previewMode)
   return (
     <div
       fluid
