@@ -20,9 +20,9 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  const getPreviewMode = async () => {
-    const domPreviewMode = await props.domElement.dataset["previewmode"]
-    return domPreviewMode 
+  const getPreviewMode = () => {
+    const domPreviewMode = props.domElement.dataset["previewmode"]
+    setPreviewMode(domPreviewMode)
   }
 
   console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
@@ -142,7 +142,8 @@ export default function RootComponent(props) {
   }
 
   const initComponent = () => {
-    getPreviewMode().then(domPreviewMode => setPreviewMode(domPreviewMode)).then(apiInit())
+    getPreviewMode()
+    apiInit()
   };
 
   let resourceSizes = [];
