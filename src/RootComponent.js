@@ -13,16 +13,17 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 export default function RootComponent(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-  const [previewMode, setPreviewMode] = useState(Boolean);
+  const [previewMode, setPreviewMode] = useState(null);
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  const getPreviewMode = () => {
+  const getPreviewMode = (apiInit) => {
     const domPreviewMode = props.domElement.dataset["previewmode"]
     setPreviewMode(domPreviewMode)
+    apiInit()
   }
 
   console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
@@ -144,8 +145,7 @@ export default function RootComponent(props) {
   }
 
   const initComponent = () => {
-    getPreviewMode()
-    apiInit()
+    getPreviewMode(apiInit)
   };
 
   let resourceSizes = [];
