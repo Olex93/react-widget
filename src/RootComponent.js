@@ -13,7 +13,7 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 export default function RootComponent(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-
+  const [previewMode, setPreviewMode] = useState(null)
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
@@ -29,12 +29,11 @@ export default function RootComponent(props) {
 
     //Set domain ID to key taken from script passed in from DOM
     const productKey = props.domElement.dataset["productkey"];
-    const previewMode = props.domElement.dataset["previewmode"];
+    setPreviewMode(props.domElement.dataset["previewmode"])
     // console.log(props.domElement)
 
 
     dispatch({ domainID: productKey });
-    dispatch({ previewMode: previewMode });
     
      
     if (previewMode !== true) {
@@ -155,7 +154,7 @@ export default function RootComponent(props) {
 
       {!loading && !error && (
         <>
-          {state.placementID === 3 && <Chatbox />}
+          {state.placementID === 3 && <Chatbox previewMode={previewMode}/>}
           {state.placementID === 1 && <Topbar />}
           {state.placementID === 4 && <Footer />}
           {state.placementID === 5 && <Iframe />}
