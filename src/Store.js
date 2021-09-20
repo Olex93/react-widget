@@ -39,37 +39,6 @@ const initialState = {
   localStorageName:'ClickNeutral'
 };
 
-// const initialState = {
-//   widgetType: 'chatBox',
-//   authToken:'',
-//   ipAddress:'',
-//   totalPageResourceSize:'',
-//   totalSessionResourcSize:'',
-//   countryFromIp: '',
-//   cityFromIp: '',
-//   chatboxExpanded: false,
-//   bodyFont: 'Arial, Helvetica, sans-serif',
-//   titleFont: 'Verdana, Geneva, Tahoma, sans-serif',
-//   standFirstFont:"Arial, Helvetica, sans-serif",
-//   //COLLAPSED CHATBOX VARS
-//   collapsedBackgroundColor: '#ffffff',
-//   lowerFrameColor: '#001514',
-//   collapsedForegroundColor: '#221D23',
-//   logoColor: '#B76914',
-//   //EXPANDED CHATBOX VARS
-//   title:'Did you know?',
-//   titleColor: '#ffffff',
-//   upperFrameColor: '#B76914',
-//   lowerFrameColor: '#001514',
-//   expandedBackgroundColor: '#ffffff',
-//   bodyForegroundColor:'#221D23',
-//   standFirstAccentColor: '#B76914',
-//   iconColor: '#6B0504',
-//   chatBoxExpandedCo2Today: '5g CO2e',
-//   chatBoxExpandedCo2Total: '1.96kg CO2e',
-//   standFirst: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
-//   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
-// };
 
 let storageName = '';
 
@@ -88,11 +57,8 @@ const Context = createContext();
 function Store(props) {
 
   storageName = (props.domElement.dataset["productkey"])
-
   const localState = JSON.parse(localStorage.getItem(`state_${storageName}`));
-
   const [state, dispatch] = useReducer(reducer, localState || initialState);
-
 
 
   useEffect(() => {

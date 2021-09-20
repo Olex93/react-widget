@@ -14,6 +14,8 @@ export default function RootComponent(props) {
   const [state, dispatch] = useContext(Context);
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
+
+  
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
@@ -142,10 +144,8 @@ export default function RootComponent(props) {
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
     getPreviewMode();
-    // if (state.previewMode == "false") {
     apiInit();
-    // }
-  }, [state.domainID]);
+  }, []);
 
   return (
     <>
