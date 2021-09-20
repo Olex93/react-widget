@@ -13,28 +13,29 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 export default function RootComponent(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-  const [previewMode, setPreviewMode] = useState(null);
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  const getPreviewMode = (apiInit) => {
-    const domPreviewMode = props.domElement.dataset["previewmode"]
-    setPreviewMode(domPreviewMode)
-    console.log('Preview mode from getPreview: ' + previewMode)
-    apiInit()
-  }
+
 
   console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
 
   const [state, dispatch] = useContext(Context);
 
-  const apiInit = () => {
-    console.log('Preview mode from api init: ' + previewMode)
 
-    if (previewMode === false) {
+  const getPreviewMode = (apiInit) => {
+    const domPreviewMode = props.domElement.dataset["previewmode"]
+    dispatch({ previewMode: domPreviewMode });
+    apiInit()
+  }
+
+  const apiInit = () => {
+    console.log('Preview mode from api init: ' + state.previewMode)
+
+    if (state.previewMode === false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
       //Fetch country and city of the end user
@@ -140,7 +141,7 @@ export default function RootComponent(props) {
           setLoading(false);
           setError("error fetching from api");
         });
-    } else if (previewMode === true) {
+    } else if (state.previewMode === true) {
       setLoading(false);
     }
   }
@@ -168,7 +169,7 @@ export default function RootComponent(props) {
 
       {!loading && !error && (
         <>
-          {state.placementID === 3 && <Chatbox previewMode={previewMode} />}
+          {state.placementID === 3 && <Chatbox />}
           {state.placementID === 1 && <Topbar />}
           {state.placementID === 4 && <Footer />}
           {state.placementID === 5 && <Iframe />}
