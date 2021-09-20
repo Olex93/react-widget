@@ -24,6 +24,7 @@ export default function RootComponent(props) {
 
   async function areWeInPreview() {
     setPreviewMode(props.domElement.dataset["previewmode"]);
+    console.log(props.domElement.dataset["previewmode"])
     return previewMode;
   }
 
@@ -134,9 +135,11 @@ export default function RootComponent(props) {
   };
 
   const initialiseComponent = () => {
-    if (previewMode !== true) {
+    if (previewMode === false) {
+      console.log("Preview mode from witin component init: " + previewMode);
       nonPreviewInit();
-    } else {
+    } else if (previewMode === true) {
+      console.log("Preview mode from witin component init: " + previewMode);
       setLoading(false);
     }
   };
@@ -150,7 +153,7 @@ export default function RootComponent(props) {
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
 
-    areWeInPreview().then(initialiseComponent());
+    areWeInPreview().then( () => initialiseComponent());
   }, []);
 
   return (
