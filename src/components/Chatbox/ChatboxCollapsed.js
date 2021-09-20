@@ -4,7 +4,7 @@ import { Context } from "../../Store";
 
 export default function ChatboxCollapsed(props) {
   const [state] = useContext(Context);
-  console.log("Preview mode from within collapsed: " + props.previewMode);
+  // console.log("Preview mode from within collapsed: " + props.previewMode);
   return (
     <>
       {props.previewMode === true && (
