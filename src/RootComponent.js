@@ -20,12 +20,15 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
+  const getPreviewMode = async () => {
+    const domPreviewMode = await props.domElement.dataset["previewmode"]
+    return domPreviewMode 
+  }
+
   console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
   const [state, dispatch] = useContext(Context);
 
-  const initComponent = () => {
-     setPreviewMode(props.domElement.dataset["previewmode"]);
-      console.log('Previewmode from within init function: ' + previewMode)
+  const apiInit = () => {
     if (previewMode === false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
@@ -136,6 +139,10 @@ export default function RootComponent(props) {
       console.log("Preview mode from witin component init: " + previewMode);
       setLoading(false);
     }
+  }
+
+  const initComponent = () => {
+    getPreviewMode().then(domPreviewMode => setPreviewMode(domPreviewMode)).then(apiInit())
   };
 
   let resourceSizes = [];
