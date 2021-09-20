@@ -71,7 +71,7 @@ const initialState = {
 //   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
 // };
 
-const storageName = '';
+let storageName = '';
 
 
 let reducer = (state, newState) => {
@@ -90,7 +90,6 @@ function Store(props) {
   storageName = (props.domElement.dataset["productkey"])
 
   const localState = JSON.parse(localStorage.getItem(`state_${storageName}`));
-
 
   const [state, dispatch] = useReducer(reducer, localState || initialState);
 
