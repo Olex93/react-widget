@@ -13,7 +13,7 @@ import { browserName, deviceType, deviceDetect } from "react-device-detect";
 export default function RootComponent(props) {
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-  const [previewMode, setPreviewMode] = useState(null);
+  const [previewMode, setPreviewMode] = useState(Boolean);
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
@@ -26,9 +26,12 @@ export default function RootComponent(props) {
   }
 
   console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
+
   const [state, dispatch] = useContext(Context);
 
   const apiInit = () => {
+    console.log('Preview mode from api init: ' + previewMode)
+
     if (previewMode === false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
@@ -136,7 +139,6 @@ export default function RootComponent(props) {
           setError("error fetching from api");
         });
     } else if (previewMode === true) {
-      console.log("Preview mode from witin component init: " + previewMode);
       setLoading(false);
     }
   }
