@@ -141,9 +141,9 @@ export default function RootComponent(props) {
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
     getPreviewMode();
-    if (state.previewMode == "false") {
+    // if (state.previewMode == "false") {
       apiInit();
-    }
+    // }
     setLoading(false);
   }, []);
 
