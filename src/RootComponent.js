@@ -20,15 +20,10 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  console.log(
-    "Preview mode from dom element: ",
-    props.domElement.dataset["previewmode"]
-  );
-  const domPreviewMode = props.domElement.dataset["previewmode"];
-  console.log("Dom preview mode: ", domPreviewMode);
-
-  const getPreviewMode = (apiInit) => {
-    dispatch({ previewMode: domPreviewMode }).then(apiInit());
+  const getPreviewMode = () => {
+    const domPreviewMode = props.domElement.dataset["previewmode"];
+    console.log("Dom preview mode: ", domPreviewMode);
+    dispatch({ previewMode: domPreviewMode });
   };
 
   const apiInit = () => {
@@ -108,7 +103,6 @@ export default function RootComponent(props) {
         })
         .then((response) => {
           //Once all data is loaded, but before the page size is calculated
-          setLoading(false);
 
           // Add if authenticated logic
 
@@ -137,16 +131,9 @@ export default function RootComponent(props) {
           });
         })
         .catch((e) => {
-          setLoading(false);
           setError("error fetching from api");
         });
-    } else if (state.previewMode == true) {
-      setLoading(false);
     }
-  };
-
-  const initComponent = () => {
-    getPreviewMode(apiInit);
   };
 
   let resourceSizes = [];
@@ -157,9 +144,13 @@ export default function RootComponent(props) {
     const productKey = props.domElement.dataset["productkey"];
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
-
-    initComponent();
+    getPreviewMode();
   }, []);
+
+  useEffect(() => {
+    apiInit();
+    setLoading(false);
+  }, [state.previewMode]);
 
   return (
     <>
