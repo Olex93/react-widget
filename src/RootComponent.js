@@ -145,7 +145,7 @@ export default function RootComponent(props) {
       apiInit();
     // }
     setLoading(false);
-  }, []);
+  }, [state.domainID]);
 
   return (
     <>
