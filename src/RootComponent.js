@@ -23,6 +23,7 @@ export default function RootComponent(props) {
   const getPreviewMode = (apiInit) => {
     const domPreviewMode = props.domElement.dataset["previewmode"]
     setPreviewMode(domPreviewMode)
+    console.log('Preview mode from getPreview: ' + previewMode)
     apiInit()
   }
 
