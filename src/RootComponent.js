@@ -22,8 +22,8 @@ export default function RootComponent(props) {
 
   const [state, dispatch] = useContext(Context);
 
-  const initComponent = async () => {
-    await setPreviewMode(props.domElement.dataset["previewmode"]);
+  const initComponent = () => {
+     setPreviewMode(props.domElement.dataset["previewmode"]);
 
     if (previewMode === false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
