@@ -7,12 +7,12 @@ export default function ChatboxCollapsed() {
   // console.log("Preview mode from within collapsed: " + props.previewMode);
   return (
     <>
-      {state.previewMode === true && (
+      {state.previewMode === 'true' && (
         <div fluid className="collapsed chatbox-wrapper pinnedToDiv">
           <ExpandCollapseToggle />
         </div>
       )}
-      {state.previewMode === false && (
+      {state.previewMode === 'false' && (
         <div fluid className="collapsed chatbox-wrapper">
           <ExpandCollapseToggle />
         </div>
