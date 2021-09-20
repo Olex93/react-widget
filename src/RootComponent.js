@@ -11,6 +11,7 @@ import axios from "axios";
 import { browserName, deviceType, deviceDetect } from "react-device-detect";
 
 export default function RootComponent(props) {
+  const [state, dispatch] = useContext(Context);
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
@@ -19,21 +20,18 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-
-
-  console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
-
-  const [state, dispatch] = useContext(Context);
+  console.log('Preview mode from dom element: ', props.domElement.dataset["previewmode"])
+  const domPreviewMode = props.domElement.dataset["previewmode"]
+  console.log('Dom preview mode: ', domPreviewMode)
 
 
   const getPreviewMode = (apiInit) => {
-    const domPreviewMode = props.domElement.dataset["previewmode"]
     dispatch({ previewMode: domPreviewMode });
     apiInit()
   }
 
   const apiInit = () => {
-    console.log('Preview mode from api init: ' + state.previewMode)
+    console.log('Preview mode from api init: ', state.previewMode)
 
     if (state.previewMode === false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
