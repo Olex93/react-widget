@@ -20,6 +20,9 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
+
+  console.log('Update live')
+
   const [state, dispatch] = useContext(Context);
 
   async function areWeInPreview() {
