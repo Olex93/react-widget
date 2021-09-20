@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'regenerator-runtime/runtime'
 
 // Find all widget divs
 const WidgetDivs = document.querySelectorAll('.clickNeutral_Widget')
