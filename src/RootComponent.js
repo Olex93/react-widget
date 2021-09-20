@@ -20,6 +20,7 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
+  console.log('Remove async')
   const [state, dispatch] = useContext(Context);
 
   const initComponent = () => {
