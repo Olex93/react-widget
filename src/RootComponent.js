@@ -26,7 +26,7 @@ export default function RootComponent(props) {
     dispatch({ previewMode: domPreviewMode });
   };
 
-  const apiInit = () => {
+  const apiInit = async () => {
     console.log("Preview mode from api init: ", state.previewMode);
 
     // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
@@ -64,7 +64,7 @@ export default function RootComponent(props) {
       .then((response) => {
         console.log(response.data);
         if (response.data) {
-          dispatch({
+          return dispatch({
             placementID: response.data.placementID,
             collapsedStyleID: response.data.collapsedStyleID,
             collapsedBackgroundColor: response.data.collapsedBackgroundColor,
@@ -89,6 +89,7 @@ export default function RootComponent(props) {
           });
         }
       })
+      .always(setLoading(false))
       .catch((error) => {
         console.log(error);
       });
@@ -142,9 +143,8 @@ export default function RootComponent(props) {
     dispatch({ domainID: productKey });
     getPreviewMode();
     // if (state.previewMode == "false") {
-      apiInit();
+    apiInit();
     // }
-    setLoading(false);
   }, [state.domainID]);
 
   return (

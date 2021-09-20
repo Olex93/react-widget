@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useState } from "react";
 // import Reducer from "./RootReducer";
 
 
@@ -36,6 +36,7 @@ const initialState = {
   chatBoxExpandedCo2Total: '1.96kg CO2e',
   standFirst: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
+  localStorageName:'ClickNeutral'
 };
 
 // const initialState = {
@@ -70,24 +71,33 @@ const initialState = {
 //   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
 // };
 
+const storageName = '';
+
 
 let reducer = (state, newState) => {
   if (newState === null) {
-    localStorage.removeItem("state");
+    localStorage.removeItem(`state_${storageName}`);
     return initialState;
   }
   return { ...state, ...newState };
 };
 
-const localState = JSON.parse(localStorage.getItem("state"));
 
 const Context = createContext();
 
 function Store(props) {
+
+  storageName = (props.domElement.dataset["productkey"])
+
+  const localState = JSON.parse(localStorage.getItem(`state_${storageName}`));
+
+
   const [state, dispatch] = useReducer(reducer, localState || initialState);
 
+
+
   useEffect(() => {
-    localStorage.setItem("state", JSON.stringify(state));
+    localStorage.setItem(`state_${storageName}`, JSON.stringify(state));
   }, [state]);
 
   return (

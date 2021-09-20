@@ -7,7 +7,7 @@ import {Store} from "./Store";
 
 function App({ domElement }) {
   return (
-    <Store>
+    <Store domElement={domElement}>
       <RootComponent domElement={domElement} />
     </Store>
   );
