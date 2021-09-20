@@ -20,18 +20,19 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  console.log('Preview mode from dom element: ', props.domElement.dataset["previewmode"])
-  const domPreviewMode = props.domElement.dataset["previewmode"]
-  console.log('Dom preview mode: ', domPreviewMode)
-
+  console.log(
+    "Preview mode from dom element: ",
+    props.domElement.dataset["previewmode"]
+  );
+  const domPreviewMode = props.domElement.dataset["previewmode"];
+  console.log("Dom preview mode: ", domPreviewMode);
 
   const getPreviewMode = (apiInit) => {
-    dispatch({ previewMode: domPreviewMode });
-    apiInit()
-  }
+    dispatch({ previewMode: domPreviewMode }).then(apiInit());
+  };
 
   const apiInit = () => {
-    console.log('Preview mode from api init: ', state.previewMode)
+    console.log("Preview mode from api init: ", state.previewMode);
 
     if (state.previewMode == false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
@@ -142,10 +143,10 @@ export default function RootComponent(props) {
     } else if (state.previewMode == true) {
       setLoading(false);
     }
-  }
+  };
 
   const initComponent = () => {
-    getPreviewMode(apiInit)
+    getPreviewMode(apiInit);
   };
 
   let resourceSizes = [];
