@@ -1,10 +1,10 @@
 .chatbox-wrapper {
   box-sizing: border-box;
-  position: fixed;
   bottom: 0;
   width: 300px;
 
   &:not(.pinnedToDiv) {
+    position: fixed;
     right: 5%;
   }
 
