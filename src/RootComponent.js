@@ -145,13 +145,16 @@ export default function RootComponent(props) {
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
     getPreviewMode();
-  }, []);
-
-  useEffect(() => {
-    console.log('Preview mode from specific useEffect', state.previewMode)
     apiInit();
     setLoading(false);
-  }, [state.previewMode]);
+
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('Preview mode from specific useEffect', state.previewMode)
+  //   apiInit();
+  //   setLoading(false);
+  // }, [state.previewMode]);
 
   return (
     <>
