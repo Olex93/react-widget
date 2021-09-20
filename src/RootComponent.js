@@ -33,7 +33,7 @@ export default function RootComponent(props) {
   const apiInit = () => {
     console.log('Preview mode from api init: ', state.previewMode)
 
-    if (state.previewMode === false) {
+    if (state.previewMode == false) {
       // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
 
       //Fetch country and city of the end user
@@ -139,7 +139,7 @@ export default function RootComponent(props) {
           setLoading(false);
           setError("error fetching from api");
         });
-    } else if (state.previewMode === true) {
+    } else if (state.previewMode == true) {
       setLoading(false);
     }
   }
