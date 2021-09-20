@@ -24,7 +24,7 @@ export default function RootComponent(props) {
 
   async function areWeInPreview() {
     setPreviewMode(props.domElement.dataset["previewmode"]);
-    console.log(props.domElement.dataset["previewmode"])
+    console.log('Preview mode from dom: ' + props.domElement.dataset["previewmode"]);
     return previewMode;
   }
 
@@ -153,7 +153,7 @@ export default function RootComponent(props) {
     // console.log(props.domElement)
     dispatch({ domainID: productKey });
 
-    areWeInPreview().then( () => initialiseComponent());
+    areWeInPreview().then(() => initialiseComponent());
   }, []);
 
   return (
