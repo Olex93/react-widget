@@ -20,7 +20,7 @@ export default function RootComponent(props) {
   // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
   // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
-  console.log('Remove async')
+  console.log('Preview mode from dom element: ' + props.domElement.dataset["previewmode"])
   const [state, dispatch] = useContext(Context);
 
   const initComponent = () => {
