@@ -18,7 +18,7 @@ export default function RootComponent(props) {
   // const getLocalDomainId = () => {
   //   setLocalDomainId(props.domElement.dataset["productkey"])
   // }
-     
+
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
@@ -95,65 +95,42 @@ export default function RootComponent(props) {
         }
       })
       .then(setLoading(false))
+      .then(getPageResourceSizes())
       .catch((error) => {
         console.log(error);
       });
-
-    //Make POST request to the .NET API, then ...
-    axios
-      .post("https://reqres.in/api/login", {
-        email: "eve.holt@reqres.in",
-        password: "cityslicka",
-      })
-      .then((response) => {
-        //Once all data is loaded, but before the page size is calculated
-
-        // Add if authenticated logic
-
-        //Can use the below package to identify ip if the above fetch request isn't great
-        // setIpAddress(ip.address());
-
-        // Capture the page url
-        // setWindowUrl(window.location.href);
-
-        //capture the resources loaded by the page
-        const loadedResources = window.performance.getEntriesByType("resource");
-        loadedResources.forEach((resourceItem) => {
-          resourceSizes.push(resourceItem.encodedBodySize);
-        });
-      })
-      .then(() => {
-        //calculate the combined total size of resources in kb
-        const totalPageResourceSize =
-          resourceSizes.reduce((a, b) => a + b, 0) / 1000;
-        console.log("Total page resources: " + totalPageResourceSize);
-
-        dispatch({
-          type: "SET_TOTAL_PAGE_SIZE",
-          payload: totalPageResourceSize,
-        });
-      })
-      .catch((e) => {
-        setError("error fetching from api");
-      });
   };
 
-  let resourceSizes = [];
-  
+  const getPageResourceSizes = async () => {
+    let resourceSizes = [];
+
+    const loadedResources = window.performance.getEntriesByType("resource");
+    loadedResources.forEach((resourceItem) => {
+      resourceSizes.push(resourceItem.transferSize);
+    });
+    console.log(window.performance.getEntriesByType("resource"))
+
+    const totalPageResourceSize =
+      resourceSizes.reduce((a, b) => a + b, 0) / 1000;
+    console.log("Total page resources: " + totalPageResourceSize);
+
+    dispatch({
+      totalPageResourceSize: totalPageResourceSize,
+    });
+  };
+
   useEffect(() => {
-    // getLocalDomainId()
     const productKey = props.domElement.dataset["productkey"];
     dispatch({ domainID: productKey });
+  }, [props.domElement.dataset]);
 
-  }, [props.domElement.dataset])
-
-  const {domainID} = state
+  const { domainID } = state;
   useEffect(() => {
+    
     setLoading(true);
-    //Set domain ID to key taken from script passed in from DOM
-    // console.log(props.domElement)
     getPreviewMode();
     apiInit();
+    
   }, [domainID]);
 
   return (
