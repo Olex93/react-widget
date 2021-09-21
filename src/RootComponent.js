@@ -8,7 +8,7 @@ import "./scss/typography.scss";
 import "./scss/global.scss";
 import axios from "axios";
 
-import { browserName, deviceType, deviceDetect } from "react-device-detect";
+import { deviceType } from "react-device-detect";
 
 export default function RootComponent(props) {
   const [state, dispatch] = useContext(Context);
@@ -32,26 +32,6 @@ export default function RootComponent(props) {
   };
 
   const apiInit = async () => {
-    console.log("Preview mode from api init: ", state.previewMode);
-
-    // console.log("-------- DEVICE TYPE: " + deviceDetect + " ----------");
-
-    //Fetch country and city of the end user
-    // fetch("https://extreme-ip-lookup.com/json/")
-    //   .then((res) => res.json())
-    //   .then((response) => {
-    //     console.log(response.country, response.city, response.query);
-    //     dispatch({
-    //       type: "SET_LOCATION",
-    //       country: response.country,
-    //       city: response.city,
-    //     });
-    //     dispatch({ type: "SET_IP_ADDRESS", payload: response.query });
-    //   })
-    //   .catch((data, status) => {
-    //     console.log("Unable to find location");
-    //   });
-
     axios
       .get(
         `https://clickneutral.fourleafsecure.co.uk/api/widget/config/${state.domainID}`,
@@ -95,7 +75,7 @@ export default function RootComponent(props) {
         }
       })
       .then(setLoading(false))
-      .then(getPageResourceSizes())
+      .then(postInitFunctions())
       .catch((error) => {
         console.log(error);
       });
@@ -103,53 +83,74 @@ export default function RootComponent(props) {
 
   let resourceSizes = [];
   let resourcesObject = [];
-  let cssResources = 0;
-  let embedResources = 0;
-  let imgResources = 0;
-  let linkResources = 0;
-  let objectResources = 0;
-  let scriptResources = 0;
-  let subdocumentResources = 0;
-  let svgResources = 0;
-  let xmlhttprequestResources = 0;
-  let otherResources = 0; 
 
-  
-  
   const getPageResourceSizes = async () => {
-
     const loadedResources = window.performance.getEntriesByType("resource");
-    loadedResources.forEach((resourceItem)  => {
+    loadedResources.forEach((resourceItem) => {
       resourceSizes.push(resourceItem.transferSize);
-      let exists = resourcesObject.filter(ro => ro.resourceType === resourceItem.initiatorType);
-      if(exists.length > 0)
-      {
+      let exists = resourcesObject.filter(
+        (ro) => ro.resourceType === resourceItem.initiatorType
+      );
+      if (exists.length > 0) {
         exists[0].resourceCount++;
         exists[0].resourceSize += resourceItem.transferSize;
-      }
-      else
-      {
+        exists[0].resourceSizeKb += resourceItem.resourceSizeKb / 1024;
+      } else {
         resourcesObject.push({
           resourceType: resourceItem.initiatorType,
           resourceSize: resourceItem.transferSize,
-          resourceCount:1
-        })
+          resourceSizeKb: resourceItem.transferSize / 1024,
+          resourceCount: 1,
+        });
       }
-      
     });
-
-    console.log(window.performance.getEntriesByType("resource"))
-
+    // console.log(window.performance.getEntriesByType("resource"));
     const totalPageResourceSize =
       resourceSizes.reduce((a, b) => a + b, 0) / 1024;
     console.log("Total page resources: " + totalPageResourceSize);
-    console.log('Resources object: ', resourcesObject)
-
+    console.log("Resources object: ", resourcesObject);
     dispatch({
       totalPageResourceSize: totalPageResourceSize,
     });
+    return;
   };
 
+  const getClientInfo = () => {
+    console.log("-------- DEVICE TYPE: ", deviceType, " ----------");
+    // Fetch country and city of the end user
+    fetch("https://extreme-ip-lookup.com/json/")
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response.country, response.city, response.query);
+        dispatch({
+          ipAddress: response.query,
+          countryFromIp: response.country,
+          cityFromIp: response.city,
+          deviceType: deviceType,
+        });
+        return;
+      })
+      .catch((data, status) => {
+        console.log("Unable to find location");
+      });
+  };
+
+  function getJSessionId() {
+    var sessionID = document.cookie.match(/JSESSIONID=[^;]+/);
+    if (sessionID != null) {
+      if (sessionID instanceof Array) sessionID = sessionID[0].substring(11);
+      else sessionID = sessionID.substring(11);
+    }
+    console.log('Session ID: ', sessionID)
+    dispatch({ sessionID: sessionID });
+    return sessionID;
+  }
+
+  const postInitFunctions = () => {
+    getPageResourceSizes();
+    getClientInfo();
+    getJSessionId();
+  };
 
   useEffect(() => {
     const productKey = props.domElement.dataset["productkey"];
