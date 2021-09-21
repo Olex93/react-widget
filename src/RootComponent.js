@@ -103,16 +103,39 @@ export default function RootComponent(props) {
 
   let resourceSizes = [];
   let resourcesObject = [];
+  let cssResources = 0;
+  let embedResources = 0;
+  let imgResources = 0;
+  let linkResources = 0;
+  let objectResources = 0;
+  let scriptResources = 0;
+  let subdocumentResources = 0;
+  let svgResources = 0;
+  let xmlhttprequestResources = 0;
+  let otherResources = 0; 
+
+  
   
   const getPageResourceSizes = async () => {
 
     const loadedResources = window.performance.getEntriesByType("resource");
     loadedResources.forEach((resourceItem)  => {
       resourceSizes.push(resourceItem.transferSize);
-      resourcesObject.push({
-        resourceType: resourceItem.initiatorType,
-        resourceSize: resourceItem.transferSize
-      })
+      let exists = resourcesObject.filter(ro => ro.resourceType === resourceItem.initiatorType);
+      if(exists.length > 0)
+      {
+        exists[0].resourceCount++;
+        exists[0].resourceSize += resourceItem.transferSize;
+      }
+      else
+      {
+        resourcesObject.push({
+          resourceType: resourceItem.initiatorType,
+          resourceSize: resourceItem.transferSize,
+          resourceCount:1
+        })
+      }
+      
     });
 
     console.log(window.performance.getEntriesByType("resource"))
@@ -127,6 +150,7 @@ export default function RootComponent(props) {
     });
   };
 
+
   useEffect(() => {
     const productKey = props.domElement.dataset["productkey"];
     dispatch({ domainID: productKey });
@@ -134,11 +158,9 @@ export default function RootComponent(props) {
 
   const { domainID } = state;
   useEffect(() => {
-    
     setLoading(true);
     getPreviewMode();
     apiInit();
-    
   }, [domainID]);
 
   return (
