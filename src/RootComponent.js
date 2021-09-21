@@ -66,7 +66,7 @@ export default function RootComponent(props) {
       })
       .then(setLoading(false))
       .then(() => {
-        if (state.previewMode !== true) {
+        if (state.previewMode !== 'true') {
           postInitFunctions();
         }
       })
@@ -88,12 +88,12 @@ export default function RootComponent(props) {
       if (exists.length > 0) {
         exists[0].resourceCount++;
         exists[0].resourceSize += resourceItem.transferSize;
-        exists[0].resourceSizeKb += resourceItem.resourceSizeKb / 1024;
+        // exists[0].resourceSizeKb += resourceItem.resourceSizeKb / 1024;
       } else {
         resourcesObject.push({
           resourceType: resourceItem.initiatorType,
           resourceSize: resourceItem.transferSize,
-          resourceSizeKb: resourceItem.transferSize / 1024,
+          // resourceSizeKb: resourceItem.transferSize / 1024,
           resourceCount: 1,
         });
       }
