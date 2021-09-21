@@ -101,41 +101,26 @@ export default function RootComponent(props) {
       });
   };
 
+  let resourceSizes = [];
+  let resourcesObject = [];
+  
   const getPageResourceSizes = async () => {
-    let resourceSizes = [];
 
     const loadedResources = window.performance.getEntriesByType("resource");
-    loadedResources.forEach((resourceItem) => {
+    loadedResources.forEach((resourceItem)  => {
       resourceSizes.push(resourceItem.transferSize);
+      resourcesObject.push({
+        resourceType: resourceItem.initiatorType,
+        resourceSize: resourceItem.transferSize
+      })
     });
+
     console.log(window.performance.getEntriesByType("resource"))
 
     const totalPageResourceSize =
       resourceSizes.reduce((a, b) => a + b, 0) / 1024;
     console.log("Total page resources: " + totalPageResourceSize);
-
-
-    var list = performance.getEntriesByType("resource");
-    // For each "resource", display its *Size property values
-    console.log("= Display Size Data");
-    for (var i=0; i < list.length; i++) {
-      console.log("== Resource[" + i + "] - " + list[i].name);
-      if ("decodedBodySize" in list[i])
-        console.log("... decodedBodySize[" + i + "] = " + list[i].decodedBodySize);
-      else
-        console.log("... decodedBodySize[" + i + "] = NOT supported");
-  
-      if ("encodedBodySize" in list[i])
-        console.log("... encodedBodySize[" + i + "] = " + list[i].encodedBodySize);
-      else
-        console.log("... encodedBodySize[" + i + "] = NOT supported");
-  
-      if ("transferSize" in list[i])
-        console.log("... transferSize[" + i + "] = " + list[i].transferSize);
-      else
-        console.log("... transferSize[" + i + "] = NOT supported");
-    }
-
+    console.log('Resources object: ', resourcesObject)
 
     dispatch({
       totalPageResourceSize: totalPageResourceSize,
