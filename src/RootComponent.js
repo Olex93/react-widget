@@ -139,7 +139,7 @@ export default function RootComponent(props) {
   };
 
   let resourceSizes = [];
-
+  
   useEffect(() => {
     // getLocalDomainId()
     const productKey = props.domElement.dataset["productkey"];
