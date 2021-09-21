@@ -14,8 +14,11 @@ export default function RootComponent(props) {
   const [state, dispatch] = useContext(Context);
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-
-  
+  // const [localDomainId, setLocalDomainId] = useState('')
+  // const getLocalDomainId = () => {
+  //   setLocalDomainId(props.domElement.dataset["productkey"])
+  // }
+     
   //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
   // const [ipAddress, setIpAddress] = useState("");
   // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
@@ -91,7 +94,7 @@ export default function RootComponent(props) {
           });
         }
       })
-      .always(setLoading(false))
+      .then(setLoading(false))
       .catch((error) => {
         console.log(error);
       });
@@ -138,14 +141,20 @@ export default function RootComponent(props) {
   let resourceSizes = [];
 
   useEffect(() => {
+    // getLocalDomainId()
+    const productKey = props.domElement.dataset["productkey"];
+    dispatch({ domainID: productKey });
+
+  }, [props.domElement.dataset])
+
+  const {domainID} = state
+  useEffect(() => {
     setLoading(true);
     //Set domain ID to key taken from script passed in from DOM
-    const productKey = props.domElement.dataset["productkey"];
     // console.log(props.domElement)
-    dispatch({ domainID: productKey });
     getPreviewMode();
     apiInit();
-  }, []);
+  }, [domainID]);
 
   return (
     <>
