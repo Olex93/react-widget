@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 // import Reducer from "./RootReducer";
 
 
@@ -15,6 +15,8 @@ const initialState = {
   totalSessionResourcSize:'',
   countryFromIp: '',
   cityFromIp: '',
+  deviceType:'',
+  sessionID: '',
   chatboxExpanded: false,
   bodyFont: 'Arial, Helvetica, sans-serif',
   titleFont: "Arial, Helvetica, sans-serif",

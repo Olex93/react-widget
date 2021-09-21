@@ -14,16 +14,6 @@ export default function RootComponent(props) {
   const [state, dispatch] = useContext(Context);
   const [loading, setLoading] = useState();
   const [error, setError] = useState("");
-  // const [localDomainId, setLocalDomainId] = useState('')
-  // const getLocalDomainId = () => {
-  //   setLocalDomainId(props.domElement.dataset["productkey"])
-  // }
-
-  //PREVIOUS STATE VARS THAT NOW NEED MOVING TO GLOBAL
-  // const [ipAddress, setIpAddress] = useState("");
-  // const [totalResourcesSize, setTotalResourcesSize] = useState(0);
-  // const [countryFromIp, setCountryFromIp] = useState("Unknown location");
-  // const [cityFromIp, setCityFromIp] = useState("Unknown city");
 
   const getPreviewMode = () => {
     const domPreviewMode = props.domElement.dataset["previewmode"];
@@ -47,7 +37,7 @@ export default function RootComponent(props) {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data) {
           return dispatch({
             placementID: response.data.placementID,
@@ -75,7 +65,11 @@ export default function RootComponent(props) {
         }
       })
       .then(setLoading(false))
-      .then(postInitFunctions())
+      .then(() => {
+        if (state.previewMode !== true) {
+          postInitFunctions();
+        }
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -107,8 +101,8 @@ export default function RootComponent(props) {
     // console.log(window.performance.getEntriesByType("resource"));
     const totalPageResourceSize =
       resourceSizes.reduce((a, b) => a + b, 0) / 1024;
-    console.log("Total page resources: " + totalPageResourceSize);
-    console.log("Resources object: ", resourcesObject);
+    // console.log("Total page resources: " + totalPageResourceSize);
+    // console.log("Resources object: ", resourcesObject);
     dispatch({
       totalPageResourceSize: totalPageResourceSize,
     });
@@ -116,12 +110,12 @@ export default function RootComponent(props) {
   };
 
   const getClientInfo = () => {
-    console.log("-------- DEVICE TYPE: ", deviceType, " ----------");
+    // console.log("-------- DEVICE TYPE: ", deviceType, " ----------");
     // Fetch country and city of the end user
     fetch("https://extreme-ip-lookup.com/json/")
       .then((res) => res.json())
       .then((response) => {
-        console.log(response.country, response.city, response.query);
+        // console.log(response.country, response.city, response.query);
         dispatch({
           ipAddress: response.query,
           countryFromIp: response.country,
@@ -141,15 +135,30 @@ export default function RootComponent(props) {
       if (sessionID instanceof Array) sessionID = sessionID[0].substring(11);
       else sessionID = sessionID.substring(11);
     }
-    console.log('Session ID: ', sessionID)
+    // console.log("Session ID: ", sessionID);
     dispatch({ sessionID: sessionID });
     return sessionID;
   }
+
+  const postDataToAPI = () => {
+    let userData = {
+      productKey: state.domainID,
+      ipAddress: state.ipAddress,
+      deviceType: state.deviceType,
+      countryFromIp: state.countryFromIp,
+      cityFromIp: state.cityFromIp,
+      totalPageResourceSize: state.totalPageResourceSize,
+      resourceBreakdown: resourcesObject,
+      sessionID: state.sessionID
+    }
+    console.log('User data: ', userData)
+  };
 
   const postInitFunctions = () => {
     getPageResourceSizes();
     getClientInfo();
     getJSessionId();
+    postDataToAPI();
   };
 
   useEffect(() => {
