@@ -18,7 +18,6 @@ export default function ChatboxExpanded() {
   const stringEnd = state.standFirst.substring(
     state.standFirst.lastIndexOf("}") + 1
   );
-
   
 
   return (
