@@ -26,8 +26,8 @@ export default function ChatboxExpanded() {
     color: state.standFirstForegroundColor,
   }
 
-  const headingFontStyles = Object.assign({}, headingFontColor, state.titleFont)
-  const standFirstInlineStyles = Object.assign({}, standFirstFontColor, state.standFirstFont)
+  // const headingFontStyles = Object.assign({}, headingFontColor, state.titleFont)
+  // const standFirstInlineStyles = Object.assign({}, standFirstFontColor, state.standFirstFont)
 
 
   return (
@@ -42,7 +42,7 @@ export default function ChatboxExpanded() {
         {state.showTitle === true && (
           <p
             className="heading"
-            style={headingFontStyles}
+            // style={headingFontStyles}
           >
             {state.title}
           </p>
@@ -61,7 +61,7 @@ export default function ChatboxExpanded() {
         >
           <p
             className="standFirstText"
-            style={standFirstInlineStyles}
+            // style={standFirstInlineStyles}
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
