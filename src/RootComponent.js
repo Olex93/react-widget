@@ -22,6 +22,7 @@ export default function RootComponent(props) {
   };
 
   const apiInit = async () => {
+    console.log('domain id:', state.domainID)
     axios
       .get(
         `https://clickneutral.fourleafsecure.co.uk/api/widget/config/${state.domainID}`,
