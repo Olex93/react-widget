@@ -26,7 +26,7 @@ export default function ExpandCollapseToggle(props) {
     backgroundColor: state.collapsedBackgroundColor,
   }
 
-  const bodyFontStyles = {...collapsedBackgroundColor, ...state.bodyFont}
+  const bodyFontStyles = Object({}, collapsedBackgroundColor, state.bodyFont);
 
   return (
     <div

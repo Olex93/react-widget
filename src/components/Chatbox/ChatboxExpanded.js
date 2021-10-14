@@ -26,8 +26,8 @@ export default function ChatboxExpanded() {
     color: state.standFirstForegroundColor,
   }
 
-  const headingFontStyles = {...headingFontColor, ...state.titleFont}
-  const standFirstInlineStyles = {...standFirstFontColor, ...state.standFirstFont}
+  const headingFontStyles = Object.assign({}, headingFontColor, state.titleFont)
+  const standFirstInlineStyles = Object.assign({}, standFirstFontColor, state.standFirstFont)
 
 
   return (
