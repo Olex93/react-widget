@@ -38,7 +38,7 @@ export default function ChatboxExpanded() {
         {state.showTitle === true && (
           <p
             className="heading"
-            style={`${headingFontColor}; ${state.titleFont}`}
+            style={{...headingFontColor, ...state.titleFont}}
           >
             {state.title}
           </p>
@@ -57,7 +57,7 @@ export default function ChatboxExpanded() {
         >
           <p
             className="standFirstText"
-            style={`${standFirstFontColor}; ${state.standFirstFont}`}
+            style={{...standFirstFontColor, ...state.standFirstFont}}
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
