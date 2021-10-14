@@ -26,12 +26,17 @@ export default function ChatboxExpanded() {
     color: state.standFirstForegroundColor,
   }
 
-  const headingFontStyles = Object.assign({}, headingFontColor, JSON.parse(state.titleFont))
-  const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
+  // const headingFontStyles = Object.assign({}, headingFontColor, JSON.parse(state.titleFont))
+  // const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
 
+  const headingStyleObject = JSON.parse(state.titleFont)
+  headingStyleObject.color = state.titleColor
+
+  const standFirstStyleObject = JSON.parse(state.standFirstFont)
+  standFirstStyleObject.color = state.standFirstForegroundColor
 
   return (
-    <div fluid className={`expanded chatbox-wrapper ${state.previewMode === 'true' ? ' pinnedToDiv' : '' }`}>
+    <div  className={`expanded chatbox-wrapper ${state.previewMode === 'true' ? ' pinnedToDiv' : '' }`}>
       <div
         className="headerSection"
         style={{
@@ -42,7 +47,7 @@ export default function ChatboxExpanded() {
         {state.showTitle === true && (
           <p
             className="heading"
-            style={headingFontStyles}
+            style={headingStyleObject}
           >
             {state.title}
           </p>
@@ -61,7 +66,7 @@ export default function ChatboxExpanded() {
         >
           <p
             className="standFirstText"
-            style={standFirstInlineStyles}
+            // style={standFirstInlineStyles}
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>

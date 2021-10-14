@@ -28,7 +28,14 @@ export default function ExpandCollapseToggle(props) {
 
   console.log('bodyFont var: ', state.bodyFont)
 
-  const bodyFontStyles = Object({}, collapsedBackgroundColor, JSON.parse(state.bodyFont));
+  // console.log('Parsed json', JSON.parse('{\"fontFamily\": \"Arial, Helvetica, sansSerif\"}'))
+  // const fontStyle = JSON.parse('{\"fontFamily\": \"Helvetica, sansSerif\"}')
+  // const bodyFontStyles = Object({}, collapsedBackgroundColor, JSON.parse(state.bodyFont));
+  
+  const styleObject = JSON.parse(state.bodyFont)
+  styleObject.backgroundColor = state.collapsedBackgroundColor
+  
+  // console.log('bodyFontStyles:', bodyFontStyles)
 
   return (
     <div
@@ -41,7 +48,7 @@ export default function ExpandCollapseToggle(props) {
     >
       <button
         className="chatBoxButton"
-        style={bodyFontStyles}
+        style={styleObject}
         onClick={ToggleChatbox}
       >
         <span style={{color: state.collapsedForegroundColor}}>Offsetting your visit</span>

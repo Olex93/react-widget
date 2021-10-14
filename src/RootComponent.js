@@ -163,9 +163,9 @@ export default function RootComponent(props) {
   };
 
   useEffect(() => {
-    const productKey = props.domElement.dataset["productkey"];
-    dispatch({ domainID: productKey });
-    // dispatch({ domainID: '1B9AB9FC-3879-4278-9E20-D069E5AE5604'});
+    // const productKey = props.domElement.dataset["productkey"];
+    // dispatch({ domainID: productKey });
+    dispatch({ domainID: '1B9AB9FC-3879-4278-9E20-D069E5AE5604'});
   }, [props.domElement.dataset]);
 
   const { domainID } = state;
