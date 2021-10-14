@@ -26,8 +26,8 @@ export default function ChatboxExpanded() {
     color: state.standFirstForegroundColor,
   }
 
-  // const headingFontStyles = Object.assign({}, headingFontColor, JSON.parse(state.titleFont))
-  // const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
+  const headingFontStyles = Object.assign({}, headingFontColor, JSON.parse(state.titleFont))
+  const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
 
   const headingStyleObject = JSON.parse(state.titleFont)
   headingStyleObject.color = state.titleColor
@@ -66,11 +66,11 @@ export default function ChatboxExpanded() {
         >
           <p
             className="standFirstText"
-            // style={standFirstInlineStyles}
+            style={standFirstInlineStyles}
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
-              {state.chatBoxExpandedCo2Today}
+              {/* {state.chatBoxExpandedCo2Today} */}
             </span>
             {stringMiddle}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
