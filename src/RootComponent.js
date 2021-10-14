@@ -37,7 +37,7 @@ export default function RootComponent(props) {
         }
       )
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         if (response.data) {
           return dispatch({
             placementID: response.data.placementID,

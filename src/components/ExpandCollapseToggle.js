@@ -22,6 +22,10 @@ export default function ExpandCollapseToggle(props) {
     }
   };
 
+  const collapsedBackgroundColor = {
+    backgroundColor: state.collapsedBackgroundColor,
+  }
+
   return (
     <div
       className="toggleButtonWrapper"
@@ -33,10 +37,7 @@ export default function ExpandCollapseToggle(props) {
     >
       <button
         className="chatBoxButton"
-        style={{
-          backgroundColor: state.collapsedBackgroundColor,
-          fontFamily: state.bodyFont,
-        }}
+        style={`${collapsedBackgroundColor}; ${state.bodyFont}`}
         onClick={ToggleChatbox}
       >
         <span style={{color: state.collapsedForegroundColor}}>Offsetting your visit</span>
