@@ -26,6 +26,10 @@ export default function ChatboxExpanded() {
     color: state.standFirstForegroundColor,
   }
 
+  const headingFontStyles = {...headingFontColor, ...state.titleFont}
+  const standFirstInlineStyles = {...standFirstFontColor, ...state.standFirstFont}
+
+
   return (
     <div fluid className={`expanded chatbox-wrapper ${state.previewMode === 'true' ? ' pinnedToDiv' : '' }`}>
       <div
@@ -38,7 +42,7 @@ export default function ChatboxExpanded() {
         {state.showTitle === true && (
           <p
             className="heading"
-            style={[headingFontColor, state.titleFont]}
+            style={headingFontStyles}
           >
             {state.title}
           </p>
@@ -57,7 +61,7 @@ export default function ChatboxExpanded() {
         >
           <p
             className="standFirstText"
-            style={[standFirstFontColor, state.standFirstFont]}
+            style={standFirstInlineStyles}
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
