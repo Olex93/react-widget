@@ -25,15 +25,19 @@ export default function ChatboxExpanded() {
   const standFirstFontColor = {
     color: state.standFirstForegroundColor,
   }
+  const bodyFontColor = {
+    color: state.bodyForegroundColor
+  }
 
-  const headingFontStyles = Object.assign({}, headingFontColor, JSON.parse(state.titleFont))
-  const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
+  // const standFirstInlineStyles = Object.assign({}, standFirstFontColor, JSON.parse(state.standFirstFont))
+  const standFirstInlineStyles = {...standFirstFontColor, ...JSON.parse(state.standFirstFont)}
+  const headingStyleObject = {...headingFontColor, ...JSON.parse(state.titleFont)}
+  const bodyFontStyleObject = {...bodyFontColor, ...JSON.parse(state.bodyFont)}
+  // const headingStyleObject = JSON.parse(state.titleFont)
+  // headingStyleObject.color = state.titleColor
+  // const standFirstStyleObject = JSON.parse(state.standFirstFont)
+  // standFirstStyleObject.color = state.standFirstForegroundColor
 
-  const headingStyleObject = JSON.parse(state.titleFont)
-  headingStyleObject.color = state.titleColor
-
-  const standFirstStyleObject = JSON.parse(state.standFirstFont)
-  standFirstStyleObject.color = state.standFirstForegroundColor
 
   return (
     <div  className={`expanded chatbox-wrapper ${state.previewMode === 'true' ? ' pinnedToDiv' : '' }`}>
@@ -70,11 +74,11 @@ export default function ChatboxExpanded() {
           >
             {stringStart}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
-              {/* {state.chatBoxExpandedCo2Today} */}
+              {state.chatBoxExpandedCo2Today} CO<sub>2</sub>e
             </span>
             {stringMiddle}{" "}
             <span style={{ color: state.standFirstAccentColor }}>
-              {state.chatBoxExpandedCo2Total}
+              {state.chatBoxExpandedCo2Total} CO<sub>2</sub>e
             </span>
             {stringEnd}
           </p>
@@ -91,13 +95,13 @@ export default function ChatboxExpanded() {
           className="bodyTextInner"
           style={{ backgroundColor: state.expandedBackgroundColor }}
         >
-          <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
+          <p className="bodyText" style={bodyFontStyleObject}>
             {state.body} {/* <a className="tooltipIcon"></a> */}
             <span className="infoIcon">
               <InfoIcon />
             </span>
           </p>
-          <p className="bodyText" style={{ color: state.bodyForegroundColor }}>
+          <p className="bodyText" style={bodyFontStyleObject}>
             Your total emissions are higher than average because you live in
             Australia, whose energy is still predominantly fossil generated.{" "}
             {/* <a className="tooltipIcon"></a> */}

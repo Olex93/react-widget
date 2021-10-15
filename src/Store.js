@@ -34,8 +34,8 @@ const initialState = {
   bodyForegroundColor:'#002b49',
   standFirstAccentColor: '#29ad9c',
   iconColor: '#f1563f',
-  chatBoxExpandedCo2Today: '5g CO2e',
-  chatBoxExpandedCo2Total: '1.96kg CO2e',
+  chatBoxExpandedCo2Today: '5g',
+  chatBoxExpandedCo2Total: '1.96kg',
   standFirst: 'Your visit today has generated {today}, and total emissions from all your visits is {total}.',
   body: 'However much or little, all carbon matters to us which is why we’re offsetting whatever is accrued by our users.',
   localStorageName:'ClickNeutral'
