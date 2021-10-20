@@ -5,6 +5,8 @@
   "dependencies": {
     "@parcel/transformer-sass": "^2.0.0",
     "parcel": "^2.0.0",
+    "preact": "^10.5.15",
+    "preact-compat": "^3.19.0",
     "react": "^16.13.1",
     "react-device-detect": "^1.17.0",
     "react-dom": "^16.13.1",
@@ -36,5 +38,9 @@
     "sass": "^1.36.0",
     "node-sass": "^4.14.1",
     "axios": "^0.21.1"
+  },
+  "aliases": {
+    "react": "preact-compat",
+    "react-dom": "preact-compat"
   }
 }
