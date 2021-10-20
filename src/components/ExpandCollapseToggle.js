@@ -27,15 +27,12 @@ export default function ExpandCollapseToggle(props) {
   }
 
   console.log('bodyFont var: ', state.bodyFont)
+  
+  // const styleObject = JSON.parse(state.bodyFont)
+  // styleObject.backgroundColor = state.collapsedBackgroundColor
 
-  // console.log('Parsed json', JSON.parse('{\"fontFamily\": \"Arial, Helvetica, sansSerif\"}'))
-  // const fontStyle = JSON.parse('{\"fontFamily\": \"Helvetica, sansSerif\"}')
-  // const bodyFontStyles = Object({}, collapsedBackgroundColor, JSON.parse(state.bodyFont));
-  
-  const styleObject = JSON.parse(state.bodyFont)
-  styleObject.backgroundColor = state.collapsedBackgroundColor
-  
-  // console.log('bodyFontStyles:', bodyFontStyles)
+  const styleObject = {...collapsedBackgroundColor, ...JSON.parse(state.bodyFont)}
+
 
   return (
     <div
